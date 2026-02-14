@@ -266,13 +266,26 @@ Disclaimer: This is an estimate only — actual eligibility and amounts depend o
                     ) : (
                       <Button
                         onClick={calculator.handleCalculate}
+                        disabled={calculator.isLoading}
                         className="px-8 bg-[#304e5d] hover:bg-[#263d48] ml-auto text-base"
                       >
-                        Show My Results
-                        <ArrowRight className="ml-2 h-4 w-4" />
+                        {calculator.isLoading ? 'Calculating...' : 'Show My Results'}
+                        {!calculator.isLoading && <ArrowRight className="ml-2 h-4 w-4" />}
                       </Button>
                     )}
                   </div>
+
+                  {/* Error Message */}
+                  {calculator.error && (
+                    <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg">
+                      <p className="text-red-800 text-sm">
+                        <strong>Error:</strong> {calculator.error}
+                      </p>
+                      <p className="text-red-600 text-sm mt-2">
+                        Please try again or contact support if the problem persists.
+                      </p>
+                    </div>
+                  )}
                 </div>
               </Card>
             </motion.div>
@@ -377,53 +390,44 @@ Disclaimer: This is an estimate only — actual eligibility and amounts depend o
                 </h3>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <CreditCard
-                    title="Colorado Child Tax Credit"
-                    status={calculator.result.coloradoCTC.status}
-                    estimatedBenefit={calculator.result.coloradoCTC.estimatedBenefit}
-                    explanation={calculator.result.coloradoCTC.explanation}
-                    reasons={calculator.result.coloradoCTC.reasons}
-                  />
-
-                  <CreditCard
-                    title="Colorado Family Affordability Tax Credit"
-                    status={calculator.result.coloradoFATC.status}
-                    estimatedBenefit={calculator.result.coloradoFATC.estimatedBenefit}
-                    explanation={calculator.result.coloradoFATC.explanation}
-                    reasons={calculator.result.coloradoFATC.reasons}
-                  />
-
-                  <CreditCard
-                    title="Colorado Earned Income Tax Credit"
-                    status={calculator.result.coloradoEITC.status}
-                    estimatedBenefit={calculator.result.coloradoEITC.estimatedBenefit}
-                    explanation={calculator.result.coloradoEITC.explanation}
-                    reasons={calculator.result.coloradoEITC.reasons}
-                  />
-
-                  <CreditCard
-                    title="Colorado Care Worker Tax Credit"
-                    status={calculator.result.coloradoCareWorker.status}
-                    estimatedBenefit={calculator.result.coloradoCareWorker.estimatedBenefit}
-                    explanation={calculator.result.coloradoCareWorker.explanation}
-                    reasons={calculator.result.coloradoCareWorker.reasons}
-                  />
-
-                  <CreditCard
-                    title="Federal Child Tax Credit"
-                    status={calculator.result.federalCTC.status}
-                    estimatedBenefit={calculator.result.federalCTC.estimatedBenefit}
-                    explanation={calculator.result.federalCTC.explanation}
-                    reasons={calculator.result.federalCTC.reasons}
-                  />
-
-                  <CreditCard
-                    title="Federal Earned Income Tax Credit"
-                    status={calculator.result.federalEITC.status}
-                    estimatedBenefit={calculator.result.federalEITC.estimatedBenefit}
-                    explanation={calculator.result.federalEITC.explanation}
-                    reasons={calculator.result.federalEITC.reasons}
-                  />
+                  {/* Sort credits by estimated benefit (highest first) */}
+                  {[
+                    {
+                      title: 'Colorado Child Tax Credit',
+                      ...calculator.result.coloradoCTC,
+                    },
+                    {
+                      title: 'Colorado Family Affordability Tax Credit',
+                      ...calculator.result.coloradoFATC,
+                    },
+                    {
+                      title: 'Colorado Earned Income Tax Credit',
+                      ...calculator.result.coloradoEITC,
+                    },
+                    {
+                      title: 'Colorado Care Worker Tax Credit',
+                      ...calculator.result.coloradoCareWorker,
+                    },
+                    {
+                      title: 'Federal Child Tax Credit',
+                      ...calculator.result.federalCTC,
+                    },
+                    {
+                      title: 'Federal Earned Income Tax Credit',
+                      ...calculator.result.federalEITC,
+                    },
+                  ]
+                    .sort((a, b) => b.estimatedBenefit - a.estimatedBenefit)
+                    .map((credit) => (
+                      <CreditCard
+                        key={credit.title}
+                        title={credit.title}
+                        status={credit.status}
+                        estimatedBenefit={credit.estimatedBenefit}
+                        explanation={credit.explanation}
+                        reasons={credit.reasons}
+                      />
+                    ))}
                 </div>
               </div>
 

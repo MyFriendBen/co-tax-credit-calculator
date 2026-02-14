@@ -28,6 +28,11 @@ export const ChildrenQuestion = memo(function ChildrenQuestion({
 }: ChildrenQuestionProps) {
   const config = QUESTION_CONFIG[type];
 
+  const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+    // Select all text on focus (if value is "0", it will be selected and replaced on type)
+    e.target.select();
+  };
+
   return (
     <QuestionLayout title={config.title} description={config.description}>
       <div>
@@ -37,6 +42,7 @@ export const ChildrenQuestion = memo(function ChildrenQuestion({
           max="20"
           value={value}
           onChange={(e) => onChange(e.target.value)}
+          onFocus={handleFocus}
           className="bg-input-background border-gray-300 h-16 text-xl"
           placeholder="0"
         />

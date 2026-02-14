@@ -21,6 +21,11 @@ export const IncomeInput = memo(function IncomeInput({
   onUpdate,
   onRemove,
 }: IncomeInputProps) {
+  const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+    // Select all text on focus for easy replacement
+    e.target.select();
+  };
+
   return (
     <div className="border-2 border-gray-200 rounded-lg p-6 space-y-4">
       <div className="flex justify-between items-center mb-4">
@@ -76,6 +81,7 @@ export const IncomeInput = memo(function IncomeInput({
             step="0.01"
             value={income.amount}
             onChange={(e) => onUpdate('amount', e.target.value)}
+            onFocus={handleFocus}
             className="pl-10 bg-input-background border-gray-300 h-14 text-lg"
             placeholder="0.00"
           />
@@ -92,6 +98,7 @@ export const IncomeInput = memo(function IncomeInput({
             step="0.5"
             value={income.hours}
             onChange={(e) => onUpdate('hours', e.target.value)}
+            onFocus={handleFocus}
             className="bg-input-background border-gray-300 h-14 text-lg"
             placeholder="40"
           />

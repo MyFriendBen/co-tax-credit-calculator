@@ -1,8 +1,8 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import type { QuestionKey } from '@/types/calculator.types';
 import type { CalculatorFormData } from '@/lib/schemas/calculator.schema';
-import { calculateAllCredits, type FilingStatus } from '@/utils/taxCalculator';
-import { calculateTotalAnnualIncome } from '@/lib/utils/calculations';
+import { mfbApi, type TaxCredit } from '@/services/mfbApi';
+import { mapApiResultsToTaxCreditResults } from '@/lib/utils/apiMapper';
 import type { TaxCreditResults } from '@/utils/taxCalculator';
 
 const INITIAL_FORM_DATA: CalculatorFormData = {
@@ -16,7 +16,7 @@ const INITIAL_FORM_DATA: CalculatorFormData = {
 };
 
 /**
- * Main calculator hook managing wizard flow and form state
+ * Main calculator hook managing wizard flow and form state with API integration
  */
 export function useCalculator() {
   const [showWelcome, setShowWelcome] = useState(true);
@@ -24,6 +24,8 @@ export function useCalculator() {
   const [questionHistory, setQuestionHistory] = useState<QuestionKey[]>([]);
   const [formData, setFormData] = useState<CalculatorFormData>(INITIAL_FORM_DATA);
   const [result, setResult] = useState<TaxCreditResults | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   // Auto-add first income when hasIncome becomes true
   useEffect(() => {
@@ -101,37 +103,29 @@ export function useCalculator() {
     setFormData(prev => ({ ...prev, ...updates }));
   }, []);
 
-  // Calculate results
-  const handleCalculate = useCallback(() => {
-    const annualIncome = formData.hasIncome ? calculateTotalAnnualIncome(formData.incomes) : 0;
+  // Calculate results via API
+  const handleCalculate = useCallback(async () => {
+    setIsLoading(true);
+    setError(null);
 
-    // Create child array with ages based on ranges
-    const childAges: number[] = [
-      ...Array(parseInt(formData.children0To5) || 0).fill(4),
-      ...Array(parseInt(formData.children6To16) || 0).fill(10),
-    ];
+    try {
+      // Step 1: Create/update screen with household data
+      await mfbApi.updateScreen(formData);
 
-    const filingStatus: FilingStatus = formData.isMarried ? 'married-joint' : 'single';
+      // Step 2: Get tax credit results
+      const apiResults = await mfbApi.getResults();
 
-    const calculationResult = calculateAllCredits({
-      filingStatus,
-      coloradoResident: 'full-year',
-      hasEarnedIncome: formData.hasIncome,
-      annualIncome,
-      children: childAges.map(age => ({
-        age,
-        livesWithYou: 'yes',
-        relationship: 'biological',
-        hasValidID: 'yes',
-      })),
-      hasChildCareExpenses: false,
-      childCareExpenses: 0,
-      isCareWorker: formData.headIsCareWorker || formData.spouseIsCareWorker,
-      careWorkerType: (formData.headIsCareWorker || formData.spouseIsCareWorker) ? 'childcare' : 'none',
-      careWorkerHours: (formData.headIsCareWorker || formData.spouseIsCareWorker) ? 728 : 0,
-    });
+      // Step 3: Map API results to our format
+      const mappedResults = mapApiResultsToTaxCreditResults(apiResults, formData);
 
-    setResult(calculationResult);
+      setResult(mappedResults);
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'An unexpected error occurred';
+      setError(errorMessage);
+      console.error('Error calculating tax credits:', err);
+    } finally {
+      setIsLoading(false);
+    }
   }, [formData]);
 
   // Reset everything
@@ -139,7 +133,9 @@ export function useCalculator() {
     setCurrentQuestion('married');
     setQuestionHistory([]);
     setResult(null);
+    setError(null);
     setFormData(INITIAL_FORM_DATA);
+    mfbApi.reset(); // Reset API state
   }, []);
 
   // Start calculator (hide welcome)
@@ -157,6 +153,8 @@ export function useCalculator() {
     allQuestions,
     currentIndex,
     progress,
+    isLoading,
+    error,
 
     // Actions
     updateFormData,

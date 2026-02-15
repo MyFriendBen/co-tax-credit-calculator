@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ArrowLeft, ArrowRight, Check, Download, Printer } from 'lucide-react';
 import { Button } from './ui/button';
@@ -5,7 +6,7 @@ import { Card } from './ui/card';
 import { Progress } from './ui/progress';
 import { useCalculator } from '@/hooks/useCalculator';
 import { useIncomeManager } from '@/hooks/useIncomeManager';
-import { calculateHouseholdSize } from '@/lib/utils/calculations';
+import { calculateHouseholdSize, validateIncomes } from '@/lib/utils/calculations';
 import {
   MarriedQuestion,
   ChildrenQuestion,
@@ -29,6 +30,9 @@ export function Calculator() {
     onChange: (incomes) => calculator.updateFormData({ incomes }),
   });
 
+  // Track if user has attempted to continue (for showing validation errors)
+  const [attemptedContinue, setAttemptedContinue] = useState(false);
+
   const householdSize = calculateHouseholdSize(
     calculator.formData.children0To5,
     calculator.formData.children6To16,
@@ -39,6 +43,27 @@ export function Calculator() {
     householdSize > MAX_HOUSEHOLD_SIZE
       ? `The max household size is ${MAX_HOUSEHOLD_SIZE}`
       : undefined;
+
+  // Only show validation error if user has attempted to continue
+  const incomeValidationError =
+    attemptedContinue &&
+    calculator.currentQuestion === 'income-details' &&
+    !validateIncomes(calculator.formData.incomes)
+      ? 'Please fill in all income fields. For hourly income, enter both the hourly rate and hours per week.'
+      : undefined;
+
+  const handleContinue = () => {
+    setAttemptedContinue(true);
+
+    // Check income validation if on income-details page
+    if (calculator.currentQuestion === 'income-details' && !validateIncomes(calculator.formData.incomes)) {
+      return; // Don't proceed if validation fails
+    }
+
+    // Clear validation state when successfully moving to next question
+    setAttemptedContinue(false);
+    calculator.goToNextQuestion();
+  };
 
   const handlePrint = () => window.print();
 
@@ -257,7 +282,7 @@ Disclaimer: This is an estimate only — actual eligibility and amounts depend o
 
                     {calculator.currentQuestion !== 'review' ? (
                       <Button
-                        onClick={calculator.goToNextQuestion}
+                        onClick={handleContinue}
                         className="bg-[#304e5d] hover:bg-[#263d48] ml-auto text-base rounded-[0px] text-[16px] p-[24px] px-[48px] py-[24px]"
                       >
                         Continue
@@ -275,7 +300,7 @@ Disclaimer: This is an estimate only — actual eligibility and amounts depend o
                     )}
                   </div>
 
-                  {/* Error Message */}
+                  {/* Error Messages */}
                   {calculator.error && (
                     <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg">
                       <p className="text-red-800 text-sm">
@@ -283,6 +308,14 @@ Disclaimer: This is an estimate only — actual eligibility and amounts depend o
                       </p>
                       <p className="text-red-600 text-sm mt-2">
                         Please try again or contact support if the problem persists.
+                      </p>
+                    </div>
+                  )}
+
+                  {incomeValidationError && (
+                    <div className="mt-4 p-4 bg-amber-50 border border-amber-200 rounded-lg">
+                      <p className="text-amber-800 text-sm">
+                        <strong>Validation Error:</strong> {incomeValidationError}
                       </p>
                     </div>
                   )}
@@ -350,11 +383,23 @@ Disclaimer: This is an estimate only — actual eligibility and amounts depend o
                   <div>
                     <h4 className="text-white/90 mb-3 font-bold">File for free</h4>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      <Button className="bg-white text-[#304e5d] hover:bg-gray-100 text-base">
-                        File online
+                      <Button asChild className="bg-white text-[#304e5d] hover:bg-gray-100 text-base">
+                        <a
+                          href="https://myfreetaxes.com/?utm_source=online&utm_medium=calculator&utm_campaign=file_for_free_online&utm_id=get_ahead&utm_term=english&utm_content=myfreetaxes"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          FILE ONLINE - DO IT YOURSELF
+                        </a>
                       </Button>
-                      <Button className="bg-white text-[#304e5d] hover:bg-gray-100 text-base">
-                        File in-person
+                      <Button asChild className="bg-white text-[#304e5d] hover:bg-gray-100 text-base">
+                        <a
+                          href="https://www.getaheadcolorado.org/fileinperson/?utm_source=online&utm_medium=calculator&utm_campaign=file_for_free_in_person&utm_id=get_ahead&utm_term=english&utm_content=gac_file_in_person"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          FILE IN-PERSON
+                        </a>
                       </Button>
                     </div>
                   </div>
@@ -362,11 +407,23 @@ Disclaimer: This is an estimate only — actual eligibility and amounts depend o
                   <div>
                     <h4 className="text-white/90 mb-3 font-bold">Other filing options</h4>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      <Button className="bg-white text-[#304e5d] hover:bg-gray-100 text-base">
-                        Paid filing options
+                      <Button asChild className="bg-white text-[#304e5d] hover:bg-gray-100 text-base">
+                        <a
+                          href="https://co.myfriendben.org/paid-tax-filing-options/?utm_source=online&utm_medium=calculator&utm_campaign=paid_filing_options&utm_id=get_ahead&utm_term=english&utm_content=mfb_page"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          PAID PREPARERS
+                        </a>
                       </Button>
-                      <Button className="bg-white text-[#304e5d] hover:bg-gray-100 text-base">
-                        FreeTaxUSA online filing
+                      <Button asChild className="bg-white text-[#304e5d] hover:bg-gray-100 text-base">
+                        <a
+                          href="https://www.freetaxusa.com/?utm_source=get_ahead_colorado"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          FILE ONLINE WITH SUPPORT FOR $16-$61
+                        </a>
                       </Button>
                     </div>
                   </div>
@@ -377,8 +434,29 @@ Disclaimer: This is an estimate only — actual eligibility and amounts depend o
                     To see what other benefits you may be eligible for, click the button below to
                     visit MyFriendBen.
                   </p>
-                  <Button className="w-full bg-white text-[#304e5d] hover:bg-gray-100 text-base">
-                    Meet MyFriendBen
+                  <Button asChild className="w-full bg-white text-[#304e5d] hover:bg-gray-100 text-base">
+                    <a
+                      href={`${import.meta.env.VITE_MFB_FRONTEND_DOMAIN}/co/step-1?referrer=gac`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      MEET MYFRIENDBEN
+                    </a>
+                  </Button>
+                </div>
+
+                <div className="border-t border-white/30 pt-6">
+                  <p className="mb-4 text-lg">
+                    Make the most of your tax return with free banking, savings and financial planning services.
+                  </p>
+                  <Button asChild className="w-full bg-white text-[#304e5d] hover:bg-gray-100 text-base">
+                    <a
+                      href="https://taxrefund.savingscollaborative.org/?lang=en"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      VISIT SAVINGS COLLABORATIVE
+                    </a>
                   </Button>
                 </div>
               </Card>

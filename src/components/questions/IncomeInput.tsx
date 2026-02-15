@@ -100,7 +100,7 @@ export const IncomeInput = memo(function IncomeInput({
             onChange={(e) => onUpdate('hours', e.target.value)}
             onFocus={handleFocus}
             className="bg-input-background border-gray-300 h-14 text-lg"
-            placeholder="40"
+            placeholder="0"
           />
         </div>
       )}

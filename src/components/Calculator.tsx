@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'motion/react';
-import { ArrowLeft, ArrowRight, Check, Download, Printer } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Check } from 'lucide-react';
 import { Button } from './ui/button';
 import { Card } from './ui/card';
 import { Progress } from './ui/progress';
@@ -75,51 +75,6 @@ export function Calculator() {
     calculator.goToNextQuestion();
   };
 
-  const handlePrint = () => window.print();
-
-  const handleDownload = () => {
-    if (!calculator.result) return;
-
-    const eligibleCredits = [
-      calculator.result.coloradoCTC.status === 'eligible' &&
-        `Colorado Child Tax Credit: Up to $${calculator.result.coloradoCTC.estimatedBenefit.toFixed(2)}`,
-      calculator.result.coloradoFATC.status === 'eligible' &&
-        `Colorado Family Affordability Tax Credit: Up to $${calculator.result.coloradoFATC.estimatedBenefit.toFixed(2)}`,
-      calculator.result.federalCTC.status === 'eligible' &&
-        `Federal Child Tax Credit: Up to $${calculator.result.federalCTC.estimatedBenefit.toFixed(2)}`,
-      calculator.result.federalEITC.status === 'eligible' &&
-        `Federal Earned Income Tax Credit: Up to $${calculator.result.federalEITC.estimatedBenefit.toFixed(2)}`,
-    ].filter(Boolean);
-
-    const content = `
-Colorado Tax Credit & Eligibility Estimator - Results
-======================================================
-Date: ${new Date().toLocaleDateString()}
-
-YOUR INFORMATION
-Filing Status: ${calculator.formData.isMarried ? 'With a Spouse' : 'Single'}
-Children under 6: ${calculator.formData.children0To5}
-Children 6-16: ${calculator.formData.children6To16}
-
-ELIGIBLE CREDITS
-${eligibleCredits.length > 0 ? eligibleCredits.join('\n') : 'No eligible credits based on your inputs.'}
-
-TOTAL ESTIMATED BENEFIT
-$${calculator.result.totalEstimatedBenefit.toFixed(2)}
-
-Disclaimer: This is an estimate only — actual eligibility and amounts depend on final tax filing and documentation.
-    `.trim();
-
-    const blob = new Blob([content], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'colorado-tax-credit-estimate.txt';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-  };
 
   return (
     <div className="space-y-6">
@@ -549,26 +504,10 @@ Disclaimer: This is an estimate only — actual eligibility and amounts depend o
               </Card>
 
               {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row gap-3">
-                <Button
-                  onClick={handlePrint}
-                  variant="outline"
-                  className="flex-1 border-[#304e5d] text-[#304e5d] hover:bg-[#304e5d]/10 text-base"
-                >
-                  <Printer className="mr-2 h-4 w-4" />
-                  {t('results.printResults')}
-                </Button>
-                <Button
-                  onClick={handleDownload}
-                  variant="outline"
-                  className="flex-1 border-[#304e5d] text-[#304e5d] hover:bg-[#304e5d]/10 text-base"
-                >
-                  <Download className="mr-2 h-4 w-4" />
-                  {t('results.downloadText')}
-                </Button>
+              <div className="flex justify-center">
                 <Button
                   onClick={calculator.handleStartOver}
-                  className="flex-1 bg-[#304e5d] hover:bg-[#263d48] text-base"
+                  className="bg-[#304e5d] hover:bg-[#263d48] text-base px-8"
                 >
                   {t('results.tryDifferent')}
                 </Button>

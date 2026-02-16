@@ -15,17 +15,14 @@
   "questions": {
     "married": {
       "title": "Do you file taxes as single or jointly with a spouse?",
-      "description": "Count kids who are 5 years old or younger as of December 31, 2025.",
       "single": "Single",
       "married": "With a Spouse"
     },
     "children0To5": {
-      "title": "How many children under age 6 did you have at the end of 2025?",
-      "description": "Count kids who are 5 years old or younger as of December 31, 2025."
+      "title": "How many children under age 6 did you have at the end of 2025?"
     },
     "children6To16": {
-      "title": "How many children between the ages of 6 and 16 did you have at the end of 2025?",
-      "description": "Count kids who are 6 to 16 years old as of December 31, 2025."
+      "title": "How many children between the ages of 6 and 16 did you have at the end of 2025?"
     },
     "hasIncome": {
       "title": "Do you have an income?",

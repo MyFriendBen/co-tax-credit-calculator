@@ -15,17 +15,14 @@
   "questions": {
     "married": {
       "title": "¿Declara impuestos como soltero o conjuntamente con su cónyuge?",
-      "description": "Cuenta a los niños que tengan 5 años o menos al 31 de diciembre de 2025.",
       "single": "Soltero",
       "married": "Con un cónyuge"
     },
     "children0To5": {
-      "title": "¿Cuántos hijos menores de 6 años tenías al finalizar el 2025?",
-      "description": "Cuenta a los niños que tengan 5 años o menos al 31 de diciembre de 2025."
+      "title": "¿Cuántos hijos menores de 6 años tenías al finalizar el 2025?"
     },
     "children6To16": {
-      "title": "¿Cuántos hijos entre 6 y 16 años tenías al finalizar el 2025?",
-      "description": "Cuenta a los niños que tengan entre 6 y 16 años al 31 de diciembre de 2025."
+      "title": "¿Cuántos hijos entre 6 y 16 años tenías al finalizar el 2025?"
     },
     "hasIncome": {
       "title": "¿Tienes ingresos?",

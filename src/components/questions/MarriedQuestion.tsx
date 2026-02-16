@@ -18,7 +18,6 @@ export const MarriedQuestion = memo(function MarriedQuestion({
   return (
     <QuestionLayout
       title={t('questions.married.title')}
-      description={t('questions.married.description')}
     >
       <div className="space-y-3">
         <RadioGroup

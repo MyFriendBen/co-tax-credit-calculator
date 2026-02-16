@@ -1,4 +1,5 @@
 import { memo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Input } from '@/components/ui/input';
 import { QuestionLayout } from '@/components/ui/QuestionLayout';
 
@@ -9,24 +10,16 @@ interface ChildrenQuestionProps {
   error?: string;
 }
 
-const QUESTION_CONFIG = {
-  '0-5': {
-    title: 'How many children under age 6 did you have at the end of 2025?',
-    description: 'Count kids who are 5 years old or younger as of December 31, 2025.',
-  },
-  '6-16': {
-    title: 'How many children between the ages of 6 and 16 did you have at the end of 2025?',
-    description: 'Count kids who are 6 to 16 years old as of December 31, 2025.',
-  },
-};
-
 export const ChildrenQuestion = memo(function ChildrenQuestion({
   type,
   value,
   onChange,
   error,
 }: ChildrenQuestionProps) {
-  const config = QUESTION_CONFIG[type];
+  const { t } = useTranslation();
+
+  const title = type === '0-5' ? t('questions.children0To5.title') : t('questions.children6To16.title');
+  const description = type === '0-5' ? t('questions.children0To5.description') : t('questions.children6To16.description');
 
   const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
     // Select all text on focus (if value is "0", it will be selected and replaced on type)
@@ -34,7 +27,7 @@ export const ChildrenQuestion = memo(function ChildrenQuestion({
   };
 
   return (
-    <QuestionLayout title={config.title} description={config.description}>
+    <QuestionLayout title={title} description={description}>
       <div>
         <Input
           type="number"

@@ -1,4 +1,5 @@
 import { memo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Card } from '@/components/ui/card';
 import { AlertCircle, CheckCircle, XCircle } from 'lucide-react';
 
@@ -10,27 +11,27 @@ interface CreditCardProps {
   reasons: string[];
 }
 
-const STATUS_CONFIG = {
+const STATUS_BASE_CONFIG = {
   eligible: {
     bg: 'bg-green-50',
     border: 'border-green-300',
     badge: 'bg-green-100 text-green-800',
     icon: CheckCircle,
-    label: 'You likely qualify',
+    labelKey: 'results.status.eligibleLabel',
   },
   ineligible: {
     bg: 'bg-gray-50',
     border: 'border-gray-300',
     badge: 'bg-gray-200 text-gray-700',
     icon: XCircle,
-    label: "Doesn't look like you qualify",
+    labelKey: 'results.status.ineligibleLabel',
   },
   maybe: {
     bg: 'bg-amber-50',
     border: 'border-amber-300',
     badge: 'bg-amber-100 text-amber-800',
     icon: AlertCircle,
-    label: 'You might qualify — check details',
+    labelKey: 'results.status.maybeLabel',
   },
 };
 
@@ -41,7 +42,8 @@ export const CreditCard = memo(function CreditCard({
   explanation,
   reasons,
 }: CreditCardProps) {
-  const config = STATUS_CONFIG[status];
+  const { t } = useTranslation();
+  const config = STATUS_BASE_CONFIG[status];
   const StatusIcon = config.icon;
 
   return (
@@ -53,7 +55,7 @@ export const CreditCard = memo(function CreditCard({
             className={`flex items-center gap-1.5 text-sm px-3 py-1.5 rounded ${config.badge} whitespace-nowrap self-start`}
           >
             <StatusIcon className="h-4 w-4" />
-            {config.label}
+            {t(config.labelKey)}
           </span>
         </div>
 

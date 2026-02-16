@@ -1,4 +1,5 @@
 import { memo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import { Plus } from 'lucide-react';
 import { QuestionLayout } from '@/components/ui/QuestionLayout';
@@ -18,10 +19,12 @@ export const IncomeDetailsQuestion = memo(function IncomeDetailsQuestion({
   onRemoveIncome,
   onUpdateIncome,
 }: IncomeDetailsQuestionProps) {
+  const { t } = useTranslation();
+
   return (
     <QuestionLayout
-      title="Tell us about your income"
-      description="We'll ask about each income source separately. You can add multiple incomes if you have more than one job."
+      title={t('questions.incomeDetails.title')}
+      description={t('questions.incomeDetails.description')}
     >
       <div className="space-y-6">
         {incomes.map((income, index) => (
@@ -43,7 +46,7 @@ export const IncomeDetailsQuestion = memo(function IncomeDetailsQuestion({
           className="w-full border-[#304e5d] text-[#304e5d] hover:bg-[#304e5d]/10"
         >
           <Plus className="h-4 w-4 mr-2" />
-          Add Another Income
+          {t('questions.incomeDetails.addIncome')}
         </Button>
       </div>
     </QuestionLayout>

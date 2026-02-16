@@ -1,4 +1,5 @@
 import { memo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { QuestionLayout } from '@/components/ui/QuestionLayout';
@@ -14,18 +15,20 @@ export const CareWorkerQuestion = memo(function CareWorkerQuestion({
   onChange,
   isSpouse = false,
 }: CareWorkerQuestionProps) {
+  const { t } = useTranslation();
+
   const title = isSpouse
-    ? 'Does your spouse regularly care for kids under 6 years old other than your own?'
-    : 'Do you regularly care for kids under 6 years old other than your own?';
+    ? t('questions.spouseCareWorker.title')
+    : t('questions.careWorker.title');
+
+  const description = isSpouse
+    ? t('questions.spouseCareWorker.description')
+    : t('questions.careWorker.description');
 
   return (
     <QuestionLayout
       title={title}
-      description={
-        <>
-          Care workers include <strong>family, friends and neighbors</strong> who regularly care for kids under 6 years old (about 14 hours per week) in addition to licensed childcare providers, home health aides, personal care aides, and nursing assistants.
-        </>
-      }
+      description={description}
     >
       <div className="space-y-3">
         <RadioGroup
@@ -41,7 +44,7 @@ export const CareWorkerQuestion = memo(function CareWorkerQuestion({
                 value="yes"
                 id={`${isSpouse ? 'spouse-' : ''}careworker-yes`}
               />
-              <span className="flex-1">Yes</span>
+              <span className="flex-1">{isSpouse ? t('questions.spouseCareWorker.yes') : t('questions.careWorker.yes')}</span>
             </div>
           </Label>
           <Label
@@ -53,7 +56,7 @@ export const CareWorkerQuestion = memo(function CareWorkerQuestion({
                 value="no"
                 id={`${isSpouse ? 'spouse-' : ''}careworker-no`}
               />
-              <span className="flex-1">No</span>
+              <span className="flex-1">{isSpouse ? t('questions.spouseCareWorker.no') : t('questions.careWorker.no')}</span>
             </div>
           </Label>
         </RadioGroup>

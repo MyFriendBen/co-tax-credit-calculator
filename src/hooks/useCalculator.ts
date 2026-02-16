@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import type { QuestionKey } from '@/types/calculator.types';
 import type { CalculatorFormData } from '@/lib/schemas/calculator.schema';
 import { mfbApi, type TaxCredit } from '@/services/mfbApi';
@@ -19,6 +20,7 @@ const INITIAL_FORM_DATA: CalculatorFormData = {
  * Main calculator hook managing wizard flow and form state with API integration
  */
 export function useCalculator() {
+  const { t } = useTranslation();
   const [showWelcome, setShowWelcome] = useState(true);
   const [currentQuestion, setCurrentQuestion] = useState<QuestionKey>('married');
   const [questionHistory, setQuestionHistory] = useState<QuestionKey[]>([]);
@@ -116,7 +118,7 @@ export function useCalculator() {
       const apiResults = await mfbApi.getResults();
 
       // Step 3: Map API results to our format
-      const mappedResults = mapApiResultsToTaxCreditResults(apiResults, formData);
+      const mappedResults = mapApiResultsToTaxCreditResults(apiResults, formData, t);
 
       setResult(mappedResults);
     } catch (err) {

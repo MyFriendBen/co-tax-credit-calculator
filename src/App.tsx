@@ -1,9 +1,20 @@
 import { useEffect, useRef } from 'react';
+import { Routes, Route, useParams, Navigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Calculator } from './components/Calculator';
 import logoImage from 'figma:asset/bcb4bcc792026e32409a116890b8a8dbe5d758d4.png';
 
-export default function App() {
+function CalculatorWrapper() {
+  const { whiteLabel, lang } = useParams<{ whiteLabel: string; lang: string }>();
+  const { i18n } = useTranslation();
   const contentRef = useRef<HTMLDivElement | null>(null);
+
+  // Update language when route parameter changes
+  useEffect(() => {
+    if (lang && (lang === 'en' || lang === 'es')) {
+      i18n.changeLanguage(lang);
+    }
+  }, [lang, i18n]);
 
   useEffect(() => {
     const TARGET_ORIGIN = '*'; // ideally set to your parent origin
@@ -61,5 +72,14 @@ export default function App() {
         </div>
       </main>
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <Routes>
+      <Route path="/:whiteLabel/:lang" element={<CalculatorWrapper />} />
+      <Route path="/" element={<Navigate to="/gac/en" replace />} />
+    </Routes>
   );
 }

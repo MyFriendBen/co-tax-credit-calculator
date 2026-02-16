@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'motion/react';
 import { ArrowLeft, ArrowRight, Check, Download, Printer } from 'lucide-react';
 import { Button } from './ui/button';
@@ -24,6 +25,7 @@ const MAX_HOUSEHOLD_SIZE = 8;
  * Uses custom hooks for state management and small focused question components
  */
 export function Calculator() {
+  const { t } = useTranslation();
   const calculator = useCalculator();
   const incomeManager = useIncomeManager({
     incomes: calculator.formData.incomes,
@@ -49,7 +51,7 @@ export function Calculator() {
     attemptedContinue &&
     calculator.currentQuestion === 'income-details' &&
     !validateIncomes(calculator.formData.incomes)
-      ? 'Please fill in all income fields. For hourly income, enter both the hourly rate and hours per week.'
+      ? t('errors.validation')
       : undefined;
 
   const handleContinue = () => {
@@ -126,43 +128,42 @@ Disclaimer: This is an estimate only — actual eligibility and amounts depend o
             <Card className="max-w-[1200px] mx-auto border-0">
               <div className="space-y-6">
                 <p className="text-gray-700 text-xl text-[16px] mt-[0px] mr-[0px] mb-[16px] ml-[0px] m-[0px]">
-                  Discover the tax credits you're eligible for by answering a few straightforward
-                  questions.
+                  {t('welcome.description')}
                 </p>
 
                 <Button
                   onClick={calculator.handleStart}
                   className="bg-[#304e5d] hover:bg-[#263d48] text-base mt-8 rounded-[0px] mx-[0px] my-[16px]"
                 >
-                  Let's get started!
+                  {t('welcome.startButton')}
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
 
                 <div className="bg-[rgba(167,203,201,0.42)] rounded-lg p-6 text-left space-y-4 mt-8">
                   <h3 className="text-[#304e5d] font-oswald text-xl font-bold">
-                    Here's how this works:
+                    {t('welcome.howItWorksTitle')}
                   </h3>
                   <ul className="space-y-3">
                     <li className="flex items-start gap-3">
                       <Check className="h-5 w-5 text-[#304e5d] mt-0.5 flex-shrink-0" />
                       <span className="text-gray-700">
-                        We'll ask you simple questions about your family and income
+                        {t('welcome.howItWorks.step1')}
                       </span>
                     </li>
                     <li className="flex items-start gap-3">
                       <Check className="h-5 w-5 text-[#304e5d] mt-0.5 flex-shrink-0" />
                       <span className="text-gray-700">
-                        One question at a time — no confusing forms to fill out
+                        {t('welcome.howItWorks.step2')}
                       </span>
                     </li>
                     <li className="flex items-start gap-3">
                       <Check className="h-5 w-5 text-[#304e5d] mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-700">It takes about 5 minutes to complete</span>
+                      <span className="text-gray-700">{t('welcome.howItWorks.step3')}</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <Check className="h-5 w-5 text-[#304e5d] mt-0.5 flex-shrink-0" />
                       <span className="text-gray-700">
-                        You'll get an estimate of tax credits you could receive
+                        {t('welcome.howItWorks.step4')}
                       </span>
                     </li>
                   </ul>
@@ -276,7 +277,7 @@ Disclaimer: This is an estimate only — actual eligibility and amounts depend o
                         className="px-6 text-base rounded-[0px]"
                       >
                         <ArrowLeft className="mr-2 h-4 w-4" />
-                        Back
+                        {t('navigation.back')}
                       </Button>
                     )}
 
@@ -285,7 +286,7 @@ Disclaimer: This is an estimate only — actual eligibility and amounts depend o
                         onClick={handleContinue}
                         className="bg-[#304e5d] hover:bg-[#263d48] ml-auto text-base rounded-[0px] text-[16px] p-[24px] px-[48px] py-[24px]"
                       >
-                        Continue
+                        {t('navigation.continue')}
                         <ArrowRight className="ml-2 h-4 w-4" />
                       </Button>
                     ) : (
@@ -294,7 +295,7 @@ Disclaimer: This is an estimate only — actual eligibility and amounts depend o
                         disabled={calculator.isLoading}
                         className="px-8 bg-[#304e5d] hover:bg-[#263d48] ml-auto text-base"
                       >
-                        {calculator.isLoading ? 'Calculating...' : 'Show My Results'}
+                        {calculator.isLoading ? t('navigation.calculating') : t('navigation.showResults')}
                         {!calculator.isLoading && <ArrowRight className="ml-2 h-4 w-4" />}
                       </Button>
                     )}
@@ -342,46 +343,41 @@ Disclaimer: This is an estimate only — actual eligibility and amounts depend o
                     <Check className="h-10 w-10" />
                   </div>
                   <h2 className="text-[#304e5d] font-oswald text-4xl font-bold">
-                    You could receive up to
+                    {t('results.summaryTitle')}
                   </h2>
                   <div className="text-6xl text-[#263d48] font-oswald">
                     ${calculator.result.totalEstimatedBenefit.toLocaleString()}
                   </div>
                   <p className="text-gray-700 text-lg max-w-xl mx-auto">
-                    in tax credits based on what you told us
+                    {t('results.summarySubtitle')}
                   </p>
                 </div>
               </Card>
 
               {/* Call to Action */}
               <Card className="p-8 bg-[#304e5d] text-white">
-                <h3 className="mb-4 font-oswald text-2xl font-bold">What's next?</h3>
+                <h3 className="mb-4 font-oswald text-2xl font-bold">{t('results.nextStepsTitle')}</h3>
                 <p className="mb-6 text-lg">
-                  To get these tax credits, you'll need to file a tax return for 2025. Even if you
-                  don't owe any taxes, filing is how you claim these benefits!
+                  {t('results.title')} {calculator.result.totalEstimatedBenefit.toLocaleString()} {t('results.titleEnd')}
                 </p>
                 <ul className="space-y-3 mb-6">
                   <li className="flex items-start gap-3">
                     <Check className="h-5 w-5 mt-0.5 flex-shrink-0" />
-                    <span>File your taxes by April 15, 2026</span>
+                    <span>{t('results.nextSteps.step1')}</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <Check className="h-5 w-5 mt-0.5 flex-shrink-0" />
-                    <span>
-                      Gather your documents (Social Security cards, W-2 forms, receipts)
-                    </span>
+                    <span>{t('results.nextSteps.step2')}</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <Check className="h-5 w-5 mt-0.5 flex-shrink-0" />
-                    <span>
-                      Look for free tax help if you qualify (VITA or Tax-Aide programs)
-                    </span>
+                    <span>{t('results.nextSteps.step3')}</span>
                   </li>
                 </ul>
 
                 <div className="space-y-6 mb-6">
                   <div>
-                    <h4 className="text-white/90 mb-3 font-bold">File for free</h4>
+                    <h4 className="text-white/90 mb-3 font-bold">{t('results.fileForFreeTitle')}</h4>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <Button asChild className="bg-white text-[#304e5d] hover:bg-gray-100 text-base">
                         <a
@@ -389,7 +385,7 @@ Disclaimer: This is an estimate only — actual eligibility and amounts depend o
                           target="_blank"
                           rel="noopener noreferrer"
                         >
-                          FILE ONLINE - DO IT YOURSELF
+                          {t('results.buttons.fileOnlineDIY')}
                         </a>
                       </Button>
                       <Button asChild className="bg-white text-[#304e5d] hover:bg-gray-100 text-base">
@@ -398,14 +394,14 @@ Disclaimer: This is an estimate only — actual eligibility and amounts depend o
                           target="_blank"
                           rel="noopener noreferrer"
                         >
-                          FILE IN-PERSON
+                          {t('results.buttons.fileInPerson')}
                         </a>
                       </Button>
                     </div>
                   </div>
 
                   <div>
-                    <h4 className="text-white/90 mb-3 font-bold">Other filing options</h4>
+                    <h4 className="text-white/90 mb-3 font-bold">{t('results.otherFilingTitle')}</h4>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <Button asChild className="bg-white text-[#304e5d] hover:bg-gray-100 text-base">
                         <a
@@ -413,7 +409,7 @@ Disclaimer: This is an estimate only — actual eligibility and amounts depend o
                           target="_blank"
                           rel="noopener noreferrer"
                         >
-                          PAID PREPARERS
+                          {t('results.buttons.paidPreparers')}
                         </a>
                       </Button>
                       <Button asChild className="bg-white text-[#304e5d] hover:bg-gray-100 text-base">
@@ -422,7 +418,7 @@ Disclaimer: This is an estimate only — actual eligibility and amounts depend o
                           target="_blank"
                           rel="noopener noreferrer"
                         >
-                          FILE ONLINE WITH SUPPORT FOR $16-$61
+                          {t('results.buttons.fileOnlineSupport')}
                         </a>
                       </Button>
                     </div>
@@ -431,8 +427,7 @@ Disclaimer: This is an estimate only — actual eligibility and amounts depend o
 
                 <div className="border-t border-white/30 pt-6">
                   <p className="mb-4 text-lg">
-                    To see what other benefits you may be eligible for, click the button below to
-                    visit MyFriendBen.
+                    {t('results.mfbDescription')}
                   </p>
                   <Button asChild className="w-full bg-white text-[#304e5d] hover:bg-gray-100 text-base">
                     <a
@@ -440,14 +435,14 @@ Disclaimer: This is an estimate only — actual eligibility and amounts depend o
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      MEET MYFRIENDBEN
+                      {t('results.buttons.meetMFB')}
                     </a>
                   </Button>
                 </div>
 
                 <div className="border-t border-white/30 pt-6">
                   <p className="mb-4 text-lg">
-                    Make the most of your tax return with free banking, savings and financial planning services.
+                    {t('results.savingsDescription')}
                   </p>
                   <Button asChild className="w-full bg-white text-[#304e5d] hover:bg-gray-100 text-base">
                     <a
@@ -455,7 +450,7 @@ Disclaimer: This is an estimate only — actual eligibility and amounts depend o
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      VISIT SAVINGS COLLABORATIVE
+                      {t('results.buttons.savingsCollaborative')}
                     </a>
                   </Button>
                 </div>
@@ -464,34 +459,34 @@ Disclaimer: This is an estimate only — actual eligibility and amounts depend o
               {/* Individual Credit Results */}
               <div className="space-y-4">
                 <h3 className="text-gray-900 font-oswald text-2xl md:col-span-2 font-bold">
-                  Here's the breakdown
+                  {t('results.breakdown')}
                 </h3>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {/* Sort credits by estimated benefit (highest first) */}
                   {[
                     {
-                      title: 'Colorado Child Tax Credit',
+                      title: t('results.credits.coloradoCTC'),
                       ...calculator.result.coloradoCTC,
                     },
                     {
-                      title: 'Colorado Family Affordability Tax Credit',
+                      title: t('results.credits.coloradoFATC'),
                       ...calculator.result.coloradoFATC,
                     },
                     {
-                      title: 'Colorado Earned Income Tax Credit',
+                      title: t('results.credits.coloradoEITC'),
                       ...calculator.result.coloradoEITC,
                     },
                     {
-                      title: 'Colorado Care Worker Tax Credit',
+                      title: t('results.credits.coloradoCareWorker'),
                       ...calculator.result.coloradoCareWorker,
                     },
                     {
-                      title: 'Federal Child Tax Credit',
+                      title: t('results.credits.federalCTC'),
                       ...calculator.result.federalCTC,
                     },
                     {
-                      title: 'Federal Earned Income Tax Credit',
+                      title: t('results.credits.federalEITC'),
                       ...calculator.result.federalEITC,
                     },
                   ]
@@ -512,10 +507,7 @@ Disclaimer: This is an estimate only — actual eligibility and amounts depend o
               {/* Disclaimer */}
               <Card className="p-6 bg-gray-50 border-gray-300">
                 <p className="text-sm text-gray-600">
-                  <strong>Important:</strong> These are estimates to help you plan. Your actual tax
-                  credits might be different based on your final tax return. Tax situations can be
-                  complex, so we always recommend talking with a tax professional or using official
-                  IRS and Colorado Department of Revenue resources when you file.
+                  <strong>{t('results.disclaimerLabel')}</strong> {t('results.disclaimer')}
                 </p>
               </Card>
 
@@ -527,7 +519,7 @@ Disclaimer: This is an estimate only — actual eligibility and amounts depend o
                   className="flex-1 border-[#304e5d] text-[#304e5d] hover:bg-[#304e5d]/10 text-base"
                 >
                   <Printer className="mr-2 h-4 w-4" />
-                  Print My Results
+                  {t('results.printResults')}
                 </Button>
                 <Button
                   onClick={handleDownload}
@@ -535,13 +527,13 @@ Disclaimer: This is an estimate only — actual eligibility and amounts depend o
                   className="flex-1 border-[#304e5d] text-[#304e5d] hover:bg-[#304e5d]/10 text-base"
                 >
                   <Download className="mr-2 h-4 w-4" />
-                  Download as Text
+                  {t('results.downloadText')}
                 </Button>
                 <Button
                   onClick={calculator.handleStartOver}
                   className="flex-1 bg-[#304e5d] hover:bg-[#263d48] text-base"
                 >
-                  Try a Different Scenario
+                  {t('results.tryDifferent')}
                 </Button>
               </div>
             </div>

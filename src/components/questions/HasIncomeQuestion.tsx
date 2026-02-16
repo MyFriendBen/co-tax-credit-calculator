@@ -1,4 +1,5 @@
 import { memo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { QuestionLayout } from '@/components/ui/QuestionLayout';
@@ -14,14 +15,16 @@ export const HasIncomeQuestion = memo(function HasIncomeQuestion({
   onChange,
   isMarried,
 }: HasIncomeQuestionProps) {
+  const { t } = useTranslation();
+
   const title = isMarried
-    ? 'Do you or your spouse have an income?'
-    : 'Do you have an income?';
+    ? t('questions.hasIncome.titleWithSpouse')
+    : t('questions.hasIncome.title');
 
   return (
     <QuestionLayout
       title={title}
-      description="This includes wages from a job, self-employment, or gig work."
+      description={t('questions.hasIncome.description')}
     >
       <div className="space-y-3">
         <RadioGroup
@@ -31,13 +34,13 @@ export const HasIncomeQuestion = memo(function HasIncomeQuestion({
           <Label htmlFor="income-yes" className="cursor-pointer block w-full">
             <div className="flex items-center space-x-3 p-4 rounded-lg border-2 border-gray-300 hover:border-[#304e5d] hover:bg-[#a7cbc9] transition-all cursor-pointer">
               <RadioGroupItem value="yes" id="income-yes" />
-              <span className="flex-1">Yes</span>
+              <span className="flex-1">{t('questions.hasIncome.yes')}</span>
             </div>
           </Label>
           <Label htmlFor="income-no" className="cursor-pointer block w-full">
             <div className="flex items-center space-x-3 p-4 rounded-lg border-2 border-gray-300 hover:border-[#304e5d] hover:bg-[#a7cbc9] transition-all cursor-pointer">
               <RadioGroupItem value="no" id="income-no" />
-              <span className="flex-1">No</span>
+              <span className="flex-1">{t('questions.hasIncome.no')}</span>
             </div>
           </Label>
         </RadioGroup>

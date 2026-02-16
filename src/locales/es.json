@@ -1,0 +1,172 @@
+{
+  "welcome": {
+    "title": "Estimador de Crédito Fiscal y Elegibilidad de Colorado",
+    "subtitle": "Descubra cuánto podría recibir en créditos fiscales",
+    "description": "¡Las familias con niños en Colorado ahora tienen acceso a más créditos fiscales que nunca! En 2025, las familias pueden recibir entre $2k y $10k por niño en créditos al presentar sus impuestos. En menos de 60 segundos, podrás descubrir cuánto podrías beneficiarte respondiendo estas sencillas preguntas.",
+    "startButton": "Comenzar",
+    "howItWorksTitle": "Así es como funciona:",
+    "howItWorks": {
+      "step1": "Le haremos preguntas simples sobre su familia e ingresos",
+      "step2": "Una pregunta a la vez: no hay formularios confusos que completar",
+      "step3": "Toma alrededor de 5 minutos completar",
+      "step4": "Obtendrá una estimación de los créditos fiscales que podría recibir"
+    }
+  },
+  "questions": {
+    "married": {
+      "title": "¿Declara impuestos como soltero o conjuntamente con su cónyuge?",
+      "description": "Cuenta a los niños que tengan 5 años o menos al 31 de diciembre de 2025.",
+      "single": "Soltero",
+      "married": "Con un cónyuge"
+    },
+    "children0To5": {
+      "title": "¿Cuántos hijos menores de 6 años tenías al finalizar el 2025?",
+      "description": "Cuenta a los niños que tengan 5 años o menos al 31 de diciembre de 2025."
+    },
+    "children6To16": {
+      "title": "¿Cuántos hijos entre 6 y 16 años tenías al finalizar el 2025?",
+      "description": "Cuenta a los niños que tengan entre 6 y 16 años al 31 de diciembre de 2025."
+    },
+    "hasIncome": {
+      "title": "¿Tienes ingresos?",
+      "titleWithSpouse": "¿Tiene usted o su cónyuge ingresos?",
+      "description": "Usaremos esto para estimar sus créditos fiscales.",
+      "yes": "Sí",
+      "no": "No"
+    },
+    "incomeDetails": {
+      "title": "Cuéntenos sobre sus ingresos",
+      "description": "Preguntaremos sobre cada fuente de ingresos por separado. Puede agregar múltiples ingresos si tiene más de un trabajo.",
+      "incomeLabel": "Ingresos",
+      "frequencyLabel": "¿Con qué frecuencia recibe estos ingresos?",
+      "amountLabel": "¿Cuánto recibe antes de impuestos en cada período de pago por este ingreso?",
+      "hourlyRateLabel": "¿Cuál es su tarifa por hora?",
+      "hoursLabel": "¿Cuántas horas por semana trabaja?",
+      "addIncome": "Añadir Otro Ingreso",
+      "remove": "Eliminar",
+      "frequencies": {
+        "weekly": "Semanalmente",
+        "biweekly": "2 semanas",
+        "semimonthly": "Dos veces al mes",
+        "monthly": "Mensual",
+        "hourly": "Cada hora"
+      },
+      "placeholders": {
+        "selectFrequency": "Seleccionar frecuencia",
+        "amount": "0.00",
+        "hours": "0"
+      }
+    },
+    "careWorker": {
+      "title": "¿Cuida regularmente a niños menores de 6 años que no son suyos?",
+      "description": "Los trabajadores de cuidado incluyen familiares, amigos y vecinos que cuidan regularmente a niños menores de 6 años (aproximadamente 14 horas por semana), además de proveedores profesionales de cuidado infantil, asistentes de salud en el hogar, asistentes de cuidado personal y asistentes de enfermería.",
+      "yes": "Sí",
+      "no": "No"
+    },
+    "spouseCareWorker": {
+      "title": "¿Su cónyuge cuida regularmente a niños menores de 6 años que no son suyos?",
+      "description": "Los trabajadores de cuidado incluyen familiares, amigos y vecinos que cuidan regularmente a niños menores de 6 años (aproximadamente 14 horas por semana), además de proveedores profesionales de cuidado infantil, asistentes de salud en el hogar, asistentes de cuidado personal y asistentes de enfermería.",
+      "yes": "Sí",
+      "no": "No"
+    },
+    "review": {
+      "title": "Revisemos lo que nos contó",
+      "description": "Eche un vistazo rápido para asegurarse de que todo se vea bien. ¡Siempre puedes volver y cambiar algo!",
+      "filingStatus": "Estado de declaración:",
+      "childrenUnder6": "Niños menores de 6 años:",
+      "children6To16": "Niños de 6 a 16 años:",
+      "incomeSources": "Fuentes de ingresos:",
+      "estimatedYearlyIncome": "Ingreso anual estimado:",
+      "careWorker": "Trabajador de cuidado:",
+      "careWorkerYou": "Usted",
+      "careWorkerSpouse": "Su cónyuge",
+      "careWorkerBoth": "Usted y su cónyuge"
+    }
+  },
+  "navigation": {
+    "back": "Atrás",
+    "continue": "Continuar",
+    "showResults": "Mostrar mis resultados",
+    "calculating": "Calculando...",
+    "startOver": "Comenzar de nuevo"
+  },
+  "results": {
+    "title": "Presentar impuestos 2025 y reciba",
+    "titleEnd": "en créditos fiscales",
+    "summaryTitle": "Podrías recibir hasta",
+    "summarySubtitle": "en créditos fiscales según lo que nos contó",
+    "nextStepsTitle": "Sus próximos pasos:",
+    "nextSteps": {
+      "step1": "Presente sus impuestos antes del 15 de abril de 2026",
+      "step2": "Reúna sus documentos (tarjetas de Seguro Social, formularios W-2, recibos)",
+      "step3": "Busque ayuda gratuita para impuestos si califica (programas VITA o Tax-Aide)"
+    },
+    "fileForFreeTitle": "Presentar gratis",
+    "otherFilingTitle": "Otras opciones de presentación",
+    "buttons": {
+      "fileOnlineDIY": "PRESENTAR EN LÍNEA - HÁGALO USTED MISMO",
+      "fileInPerson": "PRESENTAR EN PERSONA",
+      "paidPreparers": "PREPARADORES PAGADOS",
+      "fileOnlineSupport": "DECLARAR EN LÍNEA CON APOYO POR $16-$61",
+      "meetMFB": "CONOCE A MYFRIENDBEN",
+      "savingsCollaborative": "VISITAR SAVINGS COLLABORATIVE"
+    },
+    "mfbDescription": "Para ver qué otros beneficios puede ser elegible, haga clic en el botón a continuación para visitar MyFriendBen.",
+    "savingsDescription": "Aproveche al máximo su reembolso de impuestos con servicios gratuitos de banca, ahorro y planificación financiera.",
+    "breakdown": "Aquí está el desglose",
+    "credits": {
+      "coloradoCTC": "Crédito fiscal por hijos de Colorado",
+      "coloradoFATC": "Crédito fiscal por asequibilidad familiar de Colorado",
+      "coloradoEITC": "Crédito fiscal por ingreso del trabajo de Colorado",
+      "coloradoCareWorker": "Crédito fiscal para trabajadores de cuidado de Colorado",
+      "federalCTC": "Crédito fiscal por hijos",
+      "federalEITC": "Crédito fiscal por ingreso del trabajo"
+    },
+    "explanations": {
+      "coloradoCTC": {
+        "eligible": "Usted califica para el Crédito Fiscal por Hijos de Colorado según la información de su hogar.",
+        "ineligible": "Es posible que no califique para el Crédito Fiscal por Hijos de Colorado según sus ingresos y el tamaño de su hogar."
+      },
+      "coloradoFATC": {
+        "eligible": "¡Usted califica para el Crédito Fiscal por Asequibilidad Familiar de Colorado!",
+        "ineligible": "Es posible que no califique para el Crédito Fiscal por Asequibilidad Familiar de Colorado según la situación de su hogar."
+      },
+      "coloradoEITC": {
+        "eligible": "Usted califica para el EITC de Colorado según sus ingresos del trabajo.",
+        "ineligible": "Es posible que no califique para el EITC de Colorado según su nivel de ingresos."
+      },
+      "coloradoCareWorker": {
+        "eligible": "¡Usted califica para el Crédito Fiscal para Trabajadores de Cuidado de Colorado!",
+        "ineligible": "Es posible que no califique para el Crédito Fiscal para Trabajadores de Cuidado de Colorado. Este crédito es para aquellos que cuidan regularmente a niños menores de 6 años."
+      },
+      "federalCTC": {
+        "eligible": "Usted califica para el Crédito Fiscal por Hijos Federal según su hogar.",
+        "ineligible": "Es posible que no califique para el Crédito Fiscal por Hijos Federal según la información de su hogar."
+      },
+      "federalEITC": {
+        "eligible": "Usted califica para el EITC Federal según sus ingresos del trabajo y el tamaño de su hogar.",
+        "ineligible": "Es posible que no califique para el EITC Federal según sus ingresos y la información de su hogar."
+      }
+    },
+    "status": {
+      "eligible": "Elegible",
+      "eligibleLabel": "Probablemente califiques",
+      "ineligible": "No elegible",
+      "ineligibleLabel": "No parece que califiques",
+      "maybeLabel": "Podrías calificar — verifica los detalles"
+    },
+    "download": "Descargar resultados",
+    "downloadText": "Descargar como texto",
+    "print": "Imprimir",
+    "printResults": "Imprimir mis resultados",
+    "tryDifferent": "Probar un escenario diferente",
+    "disclaimer": "Estas son estimaciones para ayudarle a planificar. Sus créditos fiscales reales pueden ser diferentes según su declaración de impuestos final. Las situaciones fiscales pueden ser complejas, por lo que siempre recomendamos hablar con un profesional de impuestos o usar recursos oficiales del IRS y el Departamento de Ingresos de Colorado cuando presente su declaración.",
+    "disclaimerLabel": "Importante:"
+  },
+  "errors": {
+    "validation": "Complete todos los campos de ingresos. Para ingresos por hora, ingrese tanto la tarifa por hora como las horas por semana.",
+    "householdSize": "El tamaño máximo del hogar es 8",
+    "calculation": "Ocurrió un error al calcular sus créditos fiscales. Por favor, inténtelo de nuevo.",
+    "generic": "Algo salió mal. Inténtalo de nuevo o comunícate con el soporte si el problema persiste."
+  }
+}

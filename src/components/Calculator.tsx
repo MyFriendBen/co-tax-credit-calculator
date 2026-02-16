@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'motion/react';
 import { ArrowLeft, ArrowRight, Check, Download, Printer } from 'lucide-react';
@@ -17,6 +18,8 @@ import {
   ReviewQuestion,
 } from './questions';
 import { CreditCard } from './results/CreditCard';
+import { FileInPersonQuiz } from './FileInPersonQuiz';
+import { calculateYearlyIncome } from '@/lib/utils/calculations';
 
 const MAX_HOUSEHOLD_SIZE = 8;
 
@@ -26,6 +29,7 @@ const MAX_HOUSEHOLD_SIZE = 8;
  */
 export function Calculator() {
   const { t } = useTranslation();
+  const { whiteLabel } = useParams<{ whiteLabel: string; lang: string }>();
   const calculator = useCalculator();
   const incomeManager = useIncomeManager({
     incomes: calculator.formData.incomes,
@@ -34,6 +38,9 @@ export function Calculator() {
 
   // Track if user has attempted to continue (for showing validation errors)
   const [attemptedContinue, setAttemptedContinue] = useState(false);
+
+  // Track if file in-person quiz is shown
+  const [showFileInPersonQuiz, setShowFileInPersonQuiz] = useState(false);
 
   const householdSize = calculateHouseholdSize(
     calculator.formData.children0To5,
@@ -378,26 +385,52 @@ Disclaimer: This is an estimate only — actual eligibility and amounts depend o
                 <div className="space-y-6 mb-6">
                   <div>
                     <h4 className="text-white/90 mb-3 font-bold">{t('results.fileForFreeTitle')}</h4>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      <Button asChild className="bg-white text-[#304e5d] hover:bg-gray-100 text-base">
-                        <a
-                          href="https://myfreetaxes.com/?utm_source=online&utm_medium=calculator&utm_campaign=file_for_free_online&utm_id=get_ahead&utm_term=english&utm_content=myfreetaxes"
-                          target="_blank"
-                          rel="noopener noreferrer"
+
+                    <AnimatePresence mode="wait">
+                      {!showFileInPersonQuiz ? (
+                        <motion.div
+                          key="buttons"
+                          initial={{ opacity: 1, height: 'auto' }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.3 }}
+                          className="overflow-hidden"
                         >
-                          {t('results.buttons.fileOnlineDIY')}
-                        </a>
-                      </Button>
-                      <Button asChild className="bg-white text-[#304e5d] hover:bg-gray-100 text-base">
-                        <a
-                          href="https://www.getaheadcolorado.org/fileinperson/?utm_source=online&utm_medium=calculator&utm_campaign=file_for_free_in_person&utm_id=get_ahead&utm_term=english&utm_content=gac_file_in_person"
-                          target="_blank"
-                          rel="noopener noreferrer"
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <Button asChild className="bg-white text-[#304e5d] hover:bg-gray-100 text-base">
+                              <a
+                                href="https://myfreetaxes.com/?utm_source=online&utm_medium=calculator&utm_campaign=file_for_free_online&utm_id=get_ahead&utm_term=english&utm_content=myfreetaxes"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              >
+                                {t('results.buttons.fileOnlineDIY')}
+                              </a>
+                            </Button>
+                            <Button
+                              onClick={() => setShowFileInPersonQuiz(true)}
+                              className="bg-white text-[#304e5d] hover:bg-gray-100 text-base"
+                            >
+                              {t('results.buttons.fileInPerson')}
+                            </Button>
+                          </div>
+                        </motion.div>
+                      ) : (
+                        <motion.div
+                          key="quiz"
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: 'auto' }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.3, ease: 'easeInOut' }}
+                          className="overflow-hidden"
                         >
-                          {t('results.buttons.fileInPerson')}
-                        </a>
-                      </Button>
-                    </div>
+                          <FileInPersonQuiz
+                            onClose={() => setShowFileInPersonQuiz(false)}
+                            yearlyIncome={calculateYearlyIncome(calculator.formData.incomes)}
+                            caresForOtherChildren={calculator.formData.headIsCareWorker || calculator.formData.spouseIsCareWorker}
+                            whiteLabel={whiteLabel}
+                          />
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </div>
 
                   <div>

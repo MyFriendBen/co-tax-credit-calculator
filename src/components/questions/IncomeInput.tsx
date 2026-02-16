@@ -62,7 +62,7 @@ export const IncomeInput = memo(function IncomeInput({
           <SelectContent>
             <SelectItem value="weekly">{t('questions.incomeDetails.frequencies.weekly')}</SelectItem>
             <SelectItem value="biweekly">{t('questions.incomeDetails.frequencies.biweekly')}</SelectItem>
-            <SelectItem value="semi-monthly">{t('questions.incomeDetails.frequencies.semimonthly')}</SelectItem>
+            <SelectItem value="semimonthly">{t('questions.incomeDetails.frequencies.semimonthly')}</SelectItem>
             <SelectItem value="monthly">{t('questions.incomeDetails.frequencies.monthly')}</SelectItem>
             <SelectItem value="hourly">{t('questions.incomeDetails.frequencies.hourly')}</SelectItem>
           </SelectContent>

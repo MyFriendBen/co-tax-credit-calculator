@@ -88,7 +88,9 @@
     "continue": "Continue",
     "showResults": "Show My Results",
     "calculating": "Calculating...",
-    "startOver": "Start Over"
+    "startOver": "Start Over",
+    "next": "NEXT",
+    "seeMyOptions": "SEE MY OPTIONS"
   },
   "results": {
     "title": "File 2025 Taxes & Receive",
@@ -168,5 +170,115 @@
     "householdSize": "The max household size is 8",
     "calculation": "An error occurred while calculating your tax credits. Please try again.",
     "generic": "Something went wrong. Please try again or contact support if the problem persists."
+  },
+  "filingQuiz": {
+    "title": "Find the Best Way to File Your Taxes",
+    "subtitle": "Answer a few questions to get personalized recommendations",
+    "intro": "Free, in-person tax help will be limited in 2026. The good news is that you may be able to file your taxes online for free, with step-by-step help, and get your refund faster. Answer a few simple questions below to see if online filing is a good option for you.",
+    "progress": "Question {{current}} of {{total}}",
+    "questions": {
+      "computerComfort": {
+        "title": "On a scale of 1-5, how comfortable do you feel using a computer? (with 1 being the least comfortable and 5 being the most comfortable)",
+        "levels": {
+          "1": {
+            "label": "1 - Not comfortable"
+          },
+          "2": {
+            "label": "2"
+          },
+          "3": {
+            "label": "3"
+          },
+          "4": {
+            "label": "4"
+          },
+          "5": {
+            "label": "5 - Very comfortable"
+          }
+        }
+      },
+      "taxComfort": {
+        "title": "On a scale of 1-5, how comfortable do you feel about filing your own taxes? (with 1 being the least comfortable and 5 being the most comfortable)",
+        "levels": {
+          "1": {
+            "label": "1 - Not comfortable"
+          },
+          "2": {
+            "label": "2"
+          },
+          "3": {
+            "label": "3"
+          },
+          "4": {
+            "label": "4"
+          },
+          "5": {
+            "label": "5 - Very comfortable"
+          }
+        }
+      },
+      "lifeEvents": {
+        "title": "Have you experienced one of these four life changing events in the past year? (Select all that apply)",
+        "options": {
+          "birthOrAdoption": "Birth or adoption of a child",
+          "married": "Married",
+          "divorced": "Divorced or separated",
+          "spouseDeath": "Death of a spouse"
+        }
+      },
+      "received1099": {
+        "title": "Did you fill out a W9 to receive payment and/or did you receive a 1099?",
+        "yes": "Yes",
+        "no": "No"
+      },
+      "taxIdType": {
+        "title": "Do you have a social security number or are you filing with an Individual Taxpayer Identification Number (ITIN)?",
+        "ssn": "Social Security Number (SSN)",
+        "itin": "Individual Taxpayer Identification Number (ITIN)"
+      },
+      "filingYear": {
+        "title": "Are you filing only for the 2025 tax year or are you filing for a different year or multiple years?",
+        "only2025": "2025 tax year only",
+        "multipleYears": "Different year or multiple years"
+      },
+      "languageAssistance": {
+        "title": "Do you need assistance in a language other than English or Spanish?",
+        "yes": "Yes",
+        "no": "No"
+      }
+    },
+    "outcomes": {
+      "in_person_good_fit": {
+        "copy": "In-person tax help is likely best for you. Click below to find a free tax help site and book an appointment early, if you can.",
+        "button": "FILE FOR FREE IN-PERSON"
+      },
+      "in_person_still_suited": {
+        "copy": "In-person tax help is likely best for you. Click below to find a free tax help site and book an appointment early, if you can.",
+        "button": "FILE FOR FREE IN-PERSON"
+      },
+      "online_with_support": {
+        "copy": "Good news! Online tax filing may be a great fit for you. File online for free with help from a trained volunteer with the VITA program, so you can file with peace of mind and get your refund faster.",
+        "primaryButton": "FILE FOR FREE ONLINE WITH SUPPORT",
+        "inPersonLink": "Still want to see if there is capacity to help support you with free, in-person filing support? Click here"
+      },
+      "optimized_diy": {
+        "copy": "Good news! Online tax filing may be a great fit for you. File online for free with this optimized, do-it-yourself service and get access to your refund faster — often within 45 minutes after you file. Explore that DIY service below as well as two more supportive options.",
+        "buttons": {
+          "diy": "OPTIMIZED & FREE DIY ONLINE FILING",
+          "support25": "FILE ONLINE WITH SUPPORT FOR $16-$61",
+          "paid": "OTHER PAID FILING OPTIONS WITH SUPPORT"
+        },
+        "inPersonLink": "Still want to see if there is capacity to help support you with free, in-person filing support? Click here"
+      },
+      "online_and_other": {
+        "copy": "Good news! Online tax filing may be a great fit for you. Explore these options to file online, make taxes easier, and get your refund faster.",
+        "buttons": {
+          "freeOnline": "FILE FOR FREE ONLINE",
+          "support25": "FILE ONLINE WITH SUPPORT FOR $16-$61",
+          "paid": "OTHER PAID FILING OPTIONS WITH SUPPORT"
+        },
+        "inPersonLink": "Still want to see if there is capacity to help support you with free, in-person filing support? Click here"
+      }
+    }
   }
 }

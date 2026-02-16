@@ -2,7 +2,7 @@ import * as z from 'zod';
 
 export const incomeSchema = z.object({
   id: z.string(),
-  frequency: z.enum(['weekly', 'biweekly', 'semi-monthly', 'monthly', 'hourly', '']),
+  frequency: z.enum(['weekly', 'biweekly', 'semimonthly', 'monthly', 'hourly', '']),
   amount: z.string(),
   hours: z.string(),
 });

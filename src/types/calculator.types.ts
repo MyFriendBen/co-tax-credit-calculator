@@ -1,4 +1,4 @@
-export type PayFrequency = 'weekly' | 'biweekly' | 'semi-monthly' | 'monthly' | 'hourly';
+export type PayFrequency = 'weekly' | 'biweekly' | 'semimonthly' | 'monthly' | 'hourly';
 
 export type QuestionKey =
   | 'married'

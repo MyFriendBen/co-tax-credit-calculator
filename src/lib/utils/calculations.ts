@@ -1,5 +1,4 @@
 import type { Income, PayFrequency } from '@/types/calculator.types';
-import { calculateAnnualIncome } from '@/utils/taxCalculator';
 
 /**
  * Calculate total annual income from all income sources
@@ -16,7 +15,15 @@ export function calculateTotalAnnualIncome(incomes: Income[]): number {
       // hourly rate * hours per week * 52 weeks
       annualAmount = amount * hours * 52;
     } else {
-      annualAmount = calculateAnnualIncome(income.frequency as PayFrequency, amount);
+      // Calculate annual income based on frequency
+      const multipliers: Record<Exclude<PayFrequency, 'hourly'>, number> = {
+        'weekly': 52,
+        'biweekly': 26,
+        'semimonthly': 24,
+        'monthly': 12,
+      };
+
+      annualAmount = amount * (multipliers[income.frequency as Exclude<PayFrequency, 'hourly'>] || 12);
     }
 
     return total + annualAmount;
@@ -53,3 +60,8 @@ export function validateIncomes(incomes: Income[]): boolean {
 export function generateIncomeId(): string {
   return crypto.randomUUID();
 }
+
+/**
+ * Alias for calculateTotalAnnualIncome for compatibility
+ */
+export const calculateYearlyIncome = calculateTotalAnnualIncome;

@@ -19,6 +19,7 @@ import {
 } from './questions';
 import { CreditCard } from './results/CreditCard';
 import { FileInPersonQuiz } from './FileInPersonQuiz';
+import { GoogleTranslate } from './GoogleTranslate';
 import { calculateYearlyIncome } from '@/lib/utils/calculations';
 
 const MAX_HOUSEHOLD_SIZE = 8;
@@ -122,6 +123,9 @@ Disclaimer: This is an estimate only — actual eligibility and amounts depend o
 
   return (
     <div className="space-y-6">
+      {/* Google Translate Widget */}
+      <GoogleTranslate />
+
       <AnimatePresence mode="wait">
         {/* Welcome Screen */}
         {calculator.showWelcome && (

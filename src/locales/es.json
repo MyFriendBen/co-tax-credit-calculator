@@ -101,10 +101,12 @@
     "fileForFreeTitle": "Presentar gratis",
     "otherFilingTitle": "Otras opciones de presentación",
     "buttons": {
-      "fileOnlineDIY": "PRESENTAR EN LÍNEA - HÁGALO USTED MISMO",
-      "fileInPerson": "PRESENTAR EN PERSONA",
-      "paidPreparers": "PREPARADORES PAGADOS",
-      "fileOnlineSupport": "DECLARAR EN LÍNEA CON APOYO POR $16-$61",
+      "findBestFiling": "Encuentre su mejor opción de presentación",
+      "findBestFilingSubtitle": "Responda algunas preguntas para encontrar su opción de presentación",
+      "fileOnlineDIY": "Presentar en línea - hágalo usted mismo",
+      "fileInPerson": "Presentar en persona",
+      "paidPreparers": "Preparadores pagados",
+      "fileOnlineSupport": "Declarar en línea con apoyo por $16-$61",
       "meetMFB": "CONOCE A MYFRIENDBEN",
       "savingsCollaborative": "VISITAR SAVINGS COLLABORATIVE"
     },

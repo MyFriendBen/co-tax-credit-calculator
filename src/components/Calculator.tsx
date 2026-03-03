@@ -21,6 +21,7 @@ import { CreditCard } from './results/CreditCard';
 import { FileInPersonQuiz } from './FileInPersonQuiz';
 import { GoogleTranslate } from './GoogleTranslate';
 import { calculateYearlyIncome } from '@/lib/utils/calculations';
+import { getFileInPersonLink } from '@/lib/utils/whiteLabelData';
 
 const MAX_HOUSEHOLD_SIZE = 8;
 
@@ -341,81 +342,43 @@ export function Calculator() {
                   </li>
                 </ul>
 
-                <div className="space-y-6 mb-6">
-                  <div>
-                    <h4 className="text-white/90 mb-3 font-bold">{t('results.fileForFreeTitle')}</h4>
-
-                    <AnimatePresence mode="wait">
-                      {!showFileInPersonQuiz ? (
-                        <motion.div
-                          key="buttons"
-                          initial={{ opacity: 1, height: 'auto' }}
-                          exit={{ opacity: 0, height: 0 }}
-                          transition={{ duration: 0.3 }}
-                          className="overflow-hidden"
-                        >
-                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            <Button asChild className="bg-white text-[#304e5d] hover:bg-gray-100 text-base">
-                              <a
-                                href="https://myfreetaxes.com/?utm_source=online&utm_medium=calculator&utm_campaign=file_for_free_online&utm_id=get_ahead&utm_term=english&utm_content=myfreetaxes"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                              >
-                                {t('results.buttons.fileOnlineDIY')}
-                              </a>
-                            </Button>
-                            <Button
-                              onClick={() => setShowFileInPersonQuiz(true)}
-                              className="bg-white text-[#304e5d] hover:bg-gray-100 text-base"
-                            >
-                              {t('results.buttons.fileInPerson')}
-                            </Button>
-                          </div>
-                        </motion.div>
-                      ) : (
-                        <motion.div
-                          key="quiz"
-                          initial={{ opacity: 0, height: 0 }}
-                          animate={{ opacity: 1, height: 'auto' }}
-                          exit={{ opacity: 0, height: 0 }}
-                          transition={{ duration: 0.3, ease: 'easeInOut' }}
-                          className="overflow-hidden"
-                        >
-                          <FileInPersonQuiz
-                            onClose={() => setShowFileInPersonQuiz(false)}
-                            yearlyIncome={calculateYearlyIncome(calculator.formData.incomes)}
-                            caresForOtherChildren={calculator.formData.headIsCareWorker || calculator.formData.spouseIsCareWorker}
-                            whiteLabel={whiteLabel}
-                          />
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-
-                  <div>
-                    <h4 className="text-white/90 mb-3 font-bold">{t('results.otherFilingTitle')}</h4>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      <Button asChild className="bg-white text-[#304e5d] hover:bg-gray-100 text-base">
-                        <a
-                          href="https://co.myfriendben.org/paid-tax-filing-options/?utm_source=online&utm_medium=calculator&utm_campaign=paid_filing_options&utm_id=get_ahead&utm_term=english&utm_content=mfb_page"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {t('results.buttons.paidPreparers')}
-                        </a>
+                <AnimatePresence mode="wait">
+                  {!showFileInPersonQuiz ? (
+                    <motion.div
+                      key="cta"
+                      initial={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="overflow-hidden mb-6"
+                    >
+                      <Button
+                        onClick={() => setShowFileInPersonQuiz(true)}
+                        className="w-full bg-white text-[#304e5d] hover:bg-gray-100 text-lg py-6 font-bold"
+                      >
+                        {t('results.buttons.findBestFiling')}
                       </Button>
-                      <Button asChild className="bg-white text-[#304e5d] hover:bg-gray-100 text-base">
-                        <a
-                          href="https://www.freetaxusa.com/?utm_source=get_ahead_colorado"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {t('results.buttons.fileOnlineSupport')}
-                        </a>
-                      </Button>
-                    </div>
-                  </div>
-                </div>
+                      <p className="text-white/70 text-sm text-center mt-2">
+                        {t('results.buttons.findBestFilingSubtitle')}
+                      </p>
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      key="quiz"
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.3, ease: 'easeInOut' }}
+                      className="overflow-hidden mb-6"
+                    >
+                      <FileInPersonQuiz
+                        onClose={() => setShowFileInPersonQuiz(false)}
+                        yearlyIncome={calculateYearlyIncome(calculator.formData.incomes)}
+                        caresForOtherChildren={calculator.formData.headIsCareWorker || calculator.formData.spouseIsCareWorker}
+                        whiteLabel={whiteLabel}
+                      />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
 
                 <div className="border-t border-white/30 pt-6">
                   <p className="mb-4 text-lg">
@@ -445,6 +408,58 @@ export function Calculator() {
                       {t('results.buttons.savingsCollaborative')}
                     </a>
                   </Button>
+                </div>
+
+                <div className="border-t border-white/30 pt-6">
+                  <h4 className="text-white/90 mb-3 font-bold">{t('results.fileForFreeTitle')}</h4>
+                  <ul className="space-y-2">
+                    <li>
+                      <a
+                        href="https://myfreetaxes.com/?utm_source=online&utm_medium=calculator&utm_campaign=file_for_free_online&utm_id=get_ahead&utm_term=english&utm_content=myfreetaxes"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-white underline hover:text-white/80"
+                      >
+                        {t('results.buttons.fileOnlineDIY')}
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href={getFileInPersonLink(whiteLabel)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-white underline hover:text-white/80"
+                      >
+                        {t('results.buttons.fileInPerson')}
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="border-t border-white/30 pt-6">
+                  <h4 className="text-white/90 mb-3 font-bold">{t('results.otherFilingTitle')}</h4>
+                  <ul className="space-y-2">
+                    <li>
+                      <a
+                        href="https://co.myfriendben.org/paid-tax-filing-options/?utm_source=online&utm_medium=calculator&utm_campaign=paid_filing_options&utm_id=get_ahead&utm_term=english&utm_content=mfb_page"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-white underline hover:text-white/80"
+                      >
+                        {t('results.buttons.paidPreparers')}
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="https://www.freetaxusa.com/?utm_source=get_ahead_colorado"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-white underline hover:text-white/80"
+                      >
+                        {t('results.buttons.fileOnlineSupport')}
+                      </a>
+                    </li>
+                  </ul>
                 </div>
               </Card>
 

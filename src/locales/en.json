@@ -103,10 +103,12 @@
     "fileForFreeTitle": "File for free",
     "otherFilingTitle": "Other filing options",
     "buttons": {
-      "fileOnlineDIY": "FILE ONLINE - DO IT YOURSELF",
-      "fileInPerson": "FILE IN-PERSON",
-      "paidPreparers": "PAID PREPARERS",
-      "fileOnlineSupport": "FILE ONLINE WITH SUPPORT FOR $16-$61",
+      "findBestFiling": "Find Your Best Filing Option",
+      "findBestFilingSubtitle": "Answer a few questions to find your filing option",
+      "fileOnlineDIY": "File online - do it yourself",
+      "fileInPerson": "File in-person",
+      "paidPreparers": "Paid preparers",
+      "fileOnlineSupport": "File online with support for $16-$61",
       "meetMFB": "MEET MYFRIENDBEN",
       "savingsCollaborative": "VISIT SAVINGS COLLABORATIVE"
     },

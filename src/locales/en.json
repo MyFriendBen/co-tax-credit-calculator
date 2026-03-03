@@ -1,0 +1,292 @@
+{
+  "welcome": {
+    "title": "Colorado Tax Credit & Eligibility Estimator",
+    "subtitle": "Find out how much you could receive in tax credits",
+    "description": "Families with children in Colorado now have access to more tax credits than ever before! In 2025, families may receive between $2k and $10k per child in credits when filing their taxes. In less than 60 seconds, you can find out how much you could benefit by answering these simple questions.",
+    "startButton": "Get Started",
+    "howItWorksTitle": "Here's how this works:",
+    "howItWorks": {
+      "step1": "We'll ask you simple questions about your family and income",
+      "step2": "One question at a time — no confusing forms to fill out",
+      "step3": "It takes about 5 minutes to complete",
+      "step4": "You'll get an estimate of tax credits you could receive"
+    }
+  },
+  "questions": {
+    "married": {
+      "title": "Do you file taxes as single or jointly with a spouse?",
+      "single": "Single",
+      "married": "With a Spouse"
+    },
+    "children0To5": {
+      "title": "How many children under age 6 did you have at the end of 2025?",
+      "description": "Count kids who are 5 years old or younger as of December 31, 2025."
+    },
+    "children6To16": {
+      "title": "How many children between the ages of 6 and 16 did you have at the end of 2025?",
+      "description": "Count kids who are 6 to 16 years old as of December 31, 2025."
+    },
+    "hasIncome": {
+      "title": "Do you have an income?",
+      "titleWithSpouse": "Do you or your spouse have an income?",
+      "description": "We'll use this to estimate your tax credits.",
+      "yes": "Yes",
+      "no": "No"
+    },
+    "incomeDetails": {
+      "title": "Tell us about your income",
+      "description": "We'll ask about each income source separately. You can add multiple incomes if you have more than one job.",
+      "incomeLabel": "Income",
+      "frequencyLabel": "How often are you paid this income?",
+      "amountLabel": "How much do you receive before taxes each pay period for this income?",
+      "hourlyRateLabel": "What is your hourly rate?",
+      "hoursLabel": "How many hours per week do you work?",
+      "addIncome": "Add Another Income",
+      "remove": "Remove",
+      "frequencies": {
+        "weekly": "Weekly",
+        "biweekly": "2 Weeks",
+        "semimonthly": "Twice a Month",
+        "monthly": "Monthly",
+        "hourly": "Hourly"
+      },
+      "placeholders": {
+        "selectFrequency": "Select frequency",
+        "amount": "0.00",
+        "hours": "0"
+      }
+    },
+    "careWorker": {
+      "title": "Do you regularly care for kids under 6 years old other than your own?",
+      "description": "Care workers include family, friends and neighbors who regularly care for kids under 6 years old (about 14 hours per week) in addition to licensed childcare providers, home health aides, personal care aides, and nursing assistants.",
+      "yes": "Yes",
+      "no": "No"
+    },
+    "spouseCareWorker": {
+      "title": "Does your spouse regularly care for kids under 6 years old other than your own?",
+      "description": "Care workers include family, friends and neighbors who regularly care for kids under 6 years old (about 14 hours per week) in addition to licensed childcare providers, home health aides, personal care aides, and nursing assistants.",
+      "yes": "Yes",
+      "no": "No"
+    },
+    "review": {
+      "title": "Let's review what you told us",
+      "description": "Take a quick look to make sure everything looks right. You can always go back and change something!",
+      "filingStatus": "Filing status:",
+      "childrenUnder6": "Children under 6:",
+      "children6To16": "Children 6-16:",
+      "incomeSources": "Income sources:",
+      "estimatedYearlyIncome": "Estimated yearly income:",
+      "careWorker": "Care worker:",
+      "careWorkerYou": "You",
+      "careWorkerSpouse": "Your spouse",
+      "careWorkerBoth": "You and your spouse"
+    }
+  },
+  "navigation": {
+    "back": "Back",
+    "continue": "Continue",
+    "showResults": "Show My Results",
+    "calculating": "Calculating...",
+    "startOver": "Start Over",
+    "next": "NEXT",
+    "seeMyOptions": "SEE MY OPTIONS",
+    "close": "Close"
+  },
+  "progress": {
+    "questionOf": "Question {{current}} of {{total}}",
+    "percentComplete": "{{percent}}% complete"
+  },
+  "results": {
+    "ctaTitle": "File 2025 Taxes & Receive {{amount}} in Tax Credits",
+    "summaryTitle": "You could receive up to",
+    "summarySubtitle": "in tax credits based on what you told us",
+    "nextStepsTitle": "Your next steps:",
+    "nextSteps": {
+      "step1": "File your taxes by April 15, 2026",
+      "step2": "Gather your documents (Social Security cards, W-2 forms, receipts)",
+      "step3": "Look for free tax help if you qualify (VITA or Tax-Aide programs)"
+    },
+    "fileForFreeTitle": "File for free",
+    "otherFilingTitle": "Other filing options",
+    "buttons": {
+      "findBestFiling": "Find Your Best Filing Option",
+      "findBestFilingSubtitle": "Answer a few questions to find your filing option",
+      "fileOnlineDIY": "File online - do it yourself",
+      "fileInPerson": "File in-person",
+      "paidPreparers": "Paid preparers",
+      "fileOnlineSupport": "File online with support for $16-$61",
+      "meetMFB": "MEET MYFRIENDBEN",
+      "savingsCollaborative": "VISIT SAVINGS COLLABORATIVE"
+    },
+    "mfbDescription": "To see what other benefits you may be eligible for, click the button below to visit MyFriendBen.",
+    "savingsDescription": "Make the most of your tax return with free banking, savings and financial planning services.",
+    "upToAmount": "Up to {{amount}}",
+    "breakdown": "Here's the breakdown",
+    "credits": {
+      "coloradoCTC": "Colorado Child Tax Credit",
+      "coloradoFATC": "Colorado Family Affordability Tax Credit",
+      "coloradoEITC": "Colorado Earned Income Tax Credit",
+      "coloradoCareWorker": "Colorado Care Worker Tax Credit",
+      "federalCTC": "Federal Child Tax Credit",
+      "federalEITC": "Federal Earned Income Tax Credit"
+    },
+    "explanations": {
+      "coloradoCTC": {
+        "eligible": "You qualify for the Colorado Child Tax Credit based on your household information.",
+        "ineligible": "You may not qualify for the Colorado Child Tax Credit based on your income and household size."
+      },
+      "coloradoFATC": {
+        "eligible": "You qualify for the Colorado Family Affordability Tax Credit!",
+        "ineligible": "You may not qualify for the Colorado Family Affordability Tax Credit based on your household situation."
+      },
+      "coloradoEITC": {
+        "eligible": "You qualify for the Colorado EITC based on your earned income.",
+        "ineligible": "You may not qualify for the Colorado EITC based on your income level."
+      },
+      "coloradoCareWorker": {
+        "eligible": "You qualify for the Colorado Care Worker Tax Credit!",
+        "ineligible": "You may not qualify for the Colorado Care Worker Tax Credit. This credit is for those who regularly care for children under 6."
+      },
+      "federalCTC": {
+        "eligible": "You qualify for the Federal Child Tax Credit based on your household.",
+        "ineligible": "You may not qualify for the Federal Child Tax Credit based on your household information."
+      },
+      "federalEITC": {
+        "eligible": "You qualify for the Federal EITC based on your earned income and household size.",
+        "ineligible": "You may not qualify for the Federal EITC based on your income and household information."
+      }
+    },
+    "status": {
+      "eligible": "Eligible",
+      "eligibleLabel": "You likely qualify",
+      "ineligible": "Not Eligible",
+      "ineligibleLabel": "Doesn't look like you qualify",
+      "maybeLabel": "You might qualify — check details"
+    },
+    "download": "Download Results",
+    "downloadText": "Download as Text",
+    "print": "Print",
+    "printResults": "Print My Results",
+    "tryDifferent": "Try a Different Scenario",
+    "disclaimer": "These are estimates to help you plan. Your actual tax credits might be different based on your final tax return. Tax situations can be complex, so we always recommend talking with a tax professional or using official IRS and Colorado Department of Revenue resources when you file.",
+    "disclaimerLabel": "Important:"
+  },
+  "errors": {
+    "errorLabel": "Error",
+    "validationLabel": "Validation Error",
+    "validation": "Please fill in all income fields. For hourly income, enter both the hourly rate and hours per week.",
+    "householdSize": "The max household size is 8",
+    "calculation": "An error occurred while calculating your tax credits. Please try again.",
+    "generic": "Something went wrong. Please try again or contact support if the problem persists."
+  },
+  "filingQuiz": {
+    "title": "Find the Best Way to File Your Taxes",
+    "subtitle": "Answer a few questions to get personalized recommendations",
+    "intro": "Free, in-person tax help will be limited in 2026. The good news is that you may be able to file your taxes online for free, with step-by-step help, and get your refund faster. Answer a few simple questions below to see if online filing is a good option for you.",
+    "progress": "Question {{current}} of {{total}}",
+    "questions": {
+      "computerComfort": {
+        "title": "On a scale of 1-5, how comfortable do you feel using a computer? (with 1 being the least comfortable and 5 being the most comfortable)",
+        "levels": {
+          "1": {
+            "label": "1 - Not comfortable"
+          },
+          "2": {
+            "label": "2"
+          },
+          "3": {
+            "label": "3"
+          },
+          "4": {
+            "label": "4"
+          },
+          "5": {
+            "label": "5 - Very comfortable"
+          }
+        }
+      },
+      "taxComfort": {
+        "title": "On a scale of 1-5, how comfortable do you feel about filing your own taxes? (with 1 being the least comfortable and 5 being the most comfortable)",
+        "levels": {
+          "1": {
+            "label": "1 - Not comfortable"
+          },
+          "2": {
+            "label": "2"
+          },
+          "3": {
+            "label": "3"
+          },
+          "4": {
+            "label": "4"
+          },
+          "5": {
+            "label": "5 - Very comfortable"
+          }
+        }
+      },
+      "lifeEvents": {
+        "title": "Have you experienced one of these four life changing events in the past year? (Select all that apply)",
+        "options": {
+          "birthOrAdoption": "Birth or adoption of a child",
+          "married": "Married",
+          "divorced": "Divorced or separated",
+          "spouseDeath": "Death of a spouse"
+        }
+      },
+      "received1099": {
+        "title": "Did you fill out a W9 to receive payment and/or did you receive a 1099?",
+        "yes": "Yes",
+        "no": "No"
+      },
+      "taxIdType": {
+        "title": "Do you have a social security number or are you filing with an Individual Taxpayer Identification Number (ITIN)?",
+        "ssn": "Social Security Number (SSN)",
+        "itin": "Individual Taxpayer Identification Number (ITIN)"
+      },
+      "filingYear": {
+        "title": "Are you filing only for the 2025 tax year or are you filing for a different year or multiple years?",
+        "only2025": "2025 tax year only",
+        "multipleYears": "Different year or multiple years"
+      },
+      "languageAssistance": {
+        "title": "Do you need assistance in a language other than English or Spanish?",
+        "yes": "Yes",
+        "no": "No"
+      }
+    },
+    "outcomes": {
+      "in_person_good_fit": {
+        "copy": "In-person tax help is likely best for you. Click below to find a free tax help site and book an appointment early, if you can.",
+        "button": "FILE FOR FREE IN-PERSON"
+      },
+      "in_person_still_suited": {
+        "copy": "In-person tax help is likely best for you. Click below to find a free tax help site and book an appointment early, if you can.",
+        "button": "FILE FOR FREE IN-PERSON"
+      },
+      "online_with_support": {
+        "copy": "Good news! Online tax filing may be a great fit for you. File online for free with help from a trained volunteer with the VITA program, so you can file with peace of mind and get your refund faster.",
+        "primaryButton": "FILE FOR FREE ONLINE WITH SUPPORT",
+        "inPersonLink": "Still want to see if there is capacity to help support you with free, in-person filing support? Click here"
+      },
+      "optimized_diy": {
+        "copy": "Good news! Online tax filing may be a great fit for you. File online for free with this optimized, do-it-yourself service and get access to your refund faster — often within 45 minutes after you file. Explore that DIY service below as well as two more supportive options.",
+        "buttons": {
+          "diy": "OPTIMIZED & FREE DIY ONLINE FILING",
+          "support25": "FILE ONLINE WITH SUPPORT FOR $16-$61",
+          "paid": "OTHER PAID FILING OPTIONS WITH SUPPORT"
+        },
+        "inPersonLink": "Still want to see if there is capacity to help support you with free, in-person filing support? Click here"
+      },
+      "online_and_other": {
+        "copy": "Good news! Online tax filing may be a great fit for you. Explore these options to file online, make taxes easier, and get your refund faster.",
+        "buttons": {
+          "freeOnline": "FILE FOR FREE ONLINE",
+          "support25": "FILE ONLINE WITH SUPPORT FOR $16-$61",
+          "paid": "OTHER PAID FILING OPTIONS WITH SUPPORT"
+        },
+        "inPersonLink": "Still want to see if there is capacity to help support you with free, in-person filing support? Click here"
+      }
+    }
+  }
+}

@@ -14,7 +14,7 @@
  */
 
 export type FilingStatus = 'single' | 'head-of-household' | 'married-joint' | 'married-separate';
-export type PayFrequency = 'weekly' | 'biweekly' | 'semi-monthly' | 'monthly' | 'other';
+export type PayFrequency = 'weekly' | 'biweekly' | 'semimonthly' | 'monthly' | 'other';
 export type ColoradoResidency = 'full-year' | 'part-year' | 'no';
 export type ChildRelationship = 'biological' | 'step' | 'foster' | 'adopted' | 'other';
 export type EligibilityStatus = 'eligible' | 'ineligible' | 'maybe';
@@ -63,7 +63,7 @@ export function calculateAnnualIncome(frequency: PayFrequency, amount: number): 
   const multipliers: Record<PayFrequency, number> = {
     'weekly': 52,
     'biweekly': 26,
-    'semi-monthly': 24,
+    'semimonthly': 24,
     'monthly': 12,
     'other': 12, // Default to monthly equivalent for "other"
   };

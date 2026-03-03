@@ -10,7 +10,7 @@ const INITIAL_FORM_DATA: CalculatorFormData = {
   isMarried: false,
   children0To5: '0',
   children6To16: '0',
-  hasIncome: false,
+  hasIncome: true,
   incomes: [],
   headIsCareWorker: false,
   spouseIsCareWorker: false,
@@ -44,12 +44,6 @@ export function useCalculator() {
     }
   }, [formData.hasIncome, formData.incomes.length]);
 
-  // Reset spouse care worker when not married
-  useEffect(() => {
-    if (!formData.isMarried && formData.spouseIsCareWorker) {
-      setFormData(prev => ({ ...prev, spouseIsCareWorker: false }));
-    }
-  }, [formData.isMarried, formData.spouseIsCareWorker]);
 
   // Calculate all possible questions based on current form state
   const allQuestions = useMemo((): QuestionKey[] => {
@@ -81,13 +75,12 @@ export function useCalculator() {
 
   // Navigation handlers
   const goToNextQuestion = useCallback(() => {
-    const allQuestionsUpdated = allQuestions;
-    const currentIdx = allQuestionsUpdated.indexOf(currentQuestion);
+    const currentIdx = allQuestions.indexOf(currentQuestion);
     const nextIndex = currentIdx + 1;
 
-    if (nextIndex < allQuestionsUpdated.length) {
+    if (nextIndex < allQuestions.length) {
       setQuestionHistory(prev => [...prev, currentQuestion]);
-      setCurrentQuestion(allQuestionsUpdated[nextIndex]);
+      setCurrentQuestion(allQuestions[nextIndex]);
     }
   }, [allQuestions, currentQuestion]);
 
@@ -102,7 +95,11 @@ export function useCalculator() {
 
   // Form data update handler
   const updateFormData = useCallback((updates: Partial<CalculatorFormData>) => {
-    setFormData(prev => ({ ...prev, ...updates }));
+    setFormData(prev => {
+      const next = { ...prev, ...updates };
+      if (!next.isMarried) next.spouseIsCareWorker = false;
+      return next;
+    });
   }, []);
 
   // Calculate results via API
@@ -128,7 +125,7 @@ export function useCalculator() {
     } finally {
       setIsLoading(false);
     }
-  }, [formData]);
+  }, [formData, t]);
 
   // Reset everything
   const handleStartOver = useCallback(() => {

@@ -19,10 +19,12 @@
       "married": "Con un cónyuge"
     },
     "children0To5": {
-      "title": "¿Cuántos hijos menores de 6 años tenías al finalizar el 2025?"
+      "title": "¿Cuántos hijos menores de 6 años tenías al finalizar el 2025?",
+      "description": "Cuente los niños que tienen 5 años o menos al 31 de diciembre de 2025."
     },
     "children6To16": {
-      "title": "¿Cuántos hijos entre 6 y 16 años tenías al finalizar el 2025?"
+      "title": "¿Cuántos hijos entre 6 y 16 años tenías al finalizar el 2025?",
+      "description": "Cuente los niños que tienen entre 6 y 16 años al 31 de diciembre de 2025."
     },
     "hasIncome": {
       "title": "¿Tienes ingresos?",
@@ -88,8 +90,7 @@
     "startOver": "Comenzar de nuevo"
   },
   "results": {
-    "title": "Presentar impuestos 2025 y reciba",
-    "titleEnd": "en créditos fiscales",
+    "ctaTitle": "Presentar impuestos 2025 y reciba {{amount}} en créditos fiscales",
     "summaryTitle": "Podrías recibir hasta",
     "summarySubtitle": "en créditos fiscales según lo que nos contó",
     "nextStepsTitle": "Sus próximos pasos:",

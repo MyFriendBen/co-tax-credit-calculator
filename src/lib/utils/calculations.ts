@@ -60,8 +60,3 @@ export function validateIncomes(incomes: Income[]): boolean {
 export function generateIncomeId(): string {
   return crypto.randomUUID();
 }
-
-/**
- * Alias for calculateTotalAnnualIncome for compatibility
- */
-export const calculateYearlyIncome = calculateTotalAnnualIncome;

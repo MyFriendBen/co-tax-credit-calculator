@@ -32,7 +32,7 @@ export function mapApiResultsToTaxCreditResults(
       status: isEligible ? 'eligible' : 'ineligible',
       estimatedBenefit: value,
       explanation: isEligible ? eligibleExplanation : ineligibleExplanation,
-      reasons: isEligible ? [] : [ineligibleExplanation],
+      reasons: [],
     };
   };
 

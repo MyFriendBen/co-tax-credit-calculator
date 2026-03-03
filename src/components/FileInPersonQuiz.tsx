@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { X } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
 import {
   determineFilingOutcome,
   createDefaultAnswers,
@@ -64,33 +65,6 @@ export function FileInPersonQuiz({
     }
   };
 
-  const handleNext = () => {
-    setDirection("forward");
-    if (currentQuestion < 6) {
-      setCurrentQuestion(currentQuestion + 1);
-    } else {
-      handleComplete();
-    }
-  };
-
-  const progress = ((currentQuestion + 1) / 7) * 100;
-
-  // Animation variants for slide transitions
-  const slideVariants = {
-    enter: (direction: "forward" | "backward") => ({
-      x: direction === "forward" ? 300 : -300,
-      opacity: 0,
-    }),
-    center: {
-      x: 0,
-      opacity: 1,
-    },
-    exit: (direction: "forward" | "backward") => ({
-      x: direction === "forward" ? -300 : 300,
-      opacity: 0,
-    }),
-  };
-
   // Question 0: Computer Comfort (1-5 scale)
   const renderComputerComfort = () => (
     <div className="space-y-6">
@@ -104,7 +78,7 @@ export function FileInPersonQuiz({
           <button
             key={level}
             onClick={() => {
-              setAnswers({ ...answers, computerComfort: level });
+              setAnswers(prev => ({ ...prev, computerComfort: level }));
               setTimeout(handleNext, 200);
             }}
             className={`w-full p-4 text-left rounded-lg border-2 transition-all ${
@@ -135,7 +109,7 @@ export function FileInPersonQuiz({
           <button
             key={level}
             onClick={() => {
-              setAnswers({ ...answers, taxComfort: level });
+              setAnswers(prev => ({ ...prev, taxComfort: level }));
               setTimeout(handleNext, 200);
             }}
             className={`w-full p-4 text-left rounded-lg border-2 transition-all ${
@@ -190,13 +164,13 @@ export function FileInPersonQuiz({
                 answers.lifeEvents[event.key as keyof typeof answers.lifeEvents]
               }
               onChange={(e) => {
-                setAnswers({
-                  ...answers,
+                setAnswers(prev => ({
+                  ...prev,
                   lifeEvents: {
-                    ...answers.lifeEvents,
+                    ...prev.lifeEvents,
                     [event.key]: e.target.checked,
                   },
-                });
+                }));
               }}
               className="w-5 h-5 flex-shrink-0 rounded border-gray-300 text-[#304e5d] focus:ring-[#304e5d] focus:ring-offset-0 accent-[#304e5d]"
               style={{ accentColor: "#304e5d" }}
@@ -225,7 +199,7 @@ export function FileInPersonQuiz({
       <div className="space-y-3">
         <Button
           onClick={() => {
-            setAnswers({ ...answers, received1099: true });
+            setAnswers(prev => ({ ...prev, received1099: true }));
             setTimeout(handleNext, 200);
           }}
           className="w-full h-auto py-4 bg-[#304e5d] text-white hover:bg-[#263d48]"
@@ -234,7 +208,7 @@ export function FileInPersonQuiz({
         </Button>
         <Button
           onClick={() => {
-            setAnswers({ ...answers, received1099: false });
+            setAnswers(prev => ({ ...prev, received1099: false }));
             setTimeout(handleNext, 200);
           }}
           className="w-full h-auto py-4 bg-[#304e5d] text-white hover:bg-[#263d48]"
@@ -256,7 +230,7 @@ export function FileInPersonQuiz({
       <div className="space-y-3">
         <Button
           onClick={() => {
-            setAnswers({ ...answers, taxIdType: "ssn" });
+            setAnswers(prev => ({ ...prev, taxIdType: "ssn" }));
             setTimeout(handleNext, 200);
           }}
           className="w-full h-auto py-4 bg-[#304e5d] text-white hover:bg-[#263d48]"
@@ -265,7 +239,7 @@ export function FileInPersonQuiz({
         </Button>
         <Button
           onClick={() => {
-            setAnswers({ ...answers, taxIdType: "itin" });
+            setAnswers(prev => ({ ...prev, taxIdType: "itin" }));
             setTimeout(handleNext, 200);
           }}
           className="w-full h-auto py-4 bg-[#304e5d] text-white hover:bg-[#263d48]"
@@ -287,7 +261,7 @@ export function FileInPersonQuiz({
       <div className="space-y-3">
         <Button
           onClick={() => {
-            setAnswers({ ...answers, filingYear: "2025_only" });
+            setAnswers(prev => ({ ...prev, filingYear: "2025_only" }));
             setTimeout(handleNext, 200);
           }}
           className="w-full h-auto py-4 bg-[#304e5d] text-white hover:bg-[#263d48]"
@@ -296,7 +270,7 @@ export function FileInPersonQuiz({
         </Button>
         <Button
           onClick={() => {
-            setAnswers({ ...answers, filingYear: "multiple_years" });
+            setAnswers(prev => ({ ...prev, filingYear: "multiple_years" }));
             setTimeout(handleNext, 200);
           }}
           className="w-full h-auto py-4 bg-[#304e5d] text-white hover:bg-[#263d48]"
@@ -318,7 +292,7 @@ export function FileInPersonQuiz({
       <div className="space-y-3">
         <Button
           onClick={() => {
-            setAnswers({ ...answers, needsNonEnglishSpanishHelp: true });
+            setAnswers(prev => ({ ...prev, needsNonEnglishSpanishHelp: true }));
             setTimeout(handleNext, 200);
           }}
           className="w-full h-auto py-4 bg-[#304e5d] text-white hover:bg-[#263d48]"
@@ -327,7 +301,7 @@ export function FileInPersonQuiz({
         </Button>
         <Button
           onClick={() => {
-            setAnswers({ ...answers, needsNonEnglishSpanishHelp: false });
+            setAnswers(prev => ({ ...prev, needsNonEnglishSpanishHelp: false }));
             setTimeout(handleNext, 200);
           }}
           className="w-full h-auto py-4 bg-[#304e5d] text-white hover:bg-[#263d48]"
@@ -337,6 +311,43 @@ export function FileInPersonQuiz({
       </div>
     </div>
   );
+
+  const questions = [
+    renderComputerComfort,
+    renderTaxComfort,
+    renderLifeEvents,
+    renderReceived1099,
+    renderTaxIdType,
+    renderFilingYear,
+    renderLanguageAssistance,
+  ];
+
+  const handleNext = () => {
+    setDirection("forward");
+    if (currentQuestion < questions.length - 1) {
+      setCurrentQuestion(currentQuestion + 1);
+    } else {
+      handleComplete();
+    }
+  };
+
+  const progress = ((currentQuestion + 1) / questions.length) * 100;
+
+  // Animation variants for slide transitions
+  const slideVariants = {
+    enter: (direction: "forward" | "backward") => ({
+      x: direction === "forward" ? 300 : -300,
+      opacity: 0,
+    }),
+    center: {
+      x: 0,
+      opacity: 1,
+    },
+    exit: (direction: "forward" | "backward") => ({
+      x: direction === "forward" ? -300 : 300,
+      opacity: 0,
+    }),
+  };
 
   // Results screen
   const renderOutcome = () => {
@@ -497,16 +508,6 @@ export function FileInPersonQuiz({
     );
   };
 
-  const questions = [
-    renderComputerComfort,
-    renderTaxComfort,
-    renderLifeEvents,
-    renderReceived1099,
-    renderTaxIdType,
-    renderFilingYear,
-    renderLanguageAssistance,
-  ];
-
   return (
     <div className="bg-white rounded-lg p-6 space-y-6">
       {/* Header */}
@@ -542,17 +543,12 @@ export function FileInPersonQuiz({
             <span>
               {t("filingQuiz.progress", {
                 current: currentQuestion + 1,
-                total: 7,
+                total: questions.length,
               })}
             </span>
             <span>{Math.round(progress)}%</span>
           </div>
-          <div className="w-full bg-gray-200 rounded-full h-2">
-            <div
-              className="bg-[#304e5d] h-2 rounded-full transition-all duration-300"
-              style={{ width: `${progress}%` }}
-            />
-          </div>
+          <Progress value={progress} className="h-2" />
         </div>
       )}
 

@@ -17,7 +17,7 @@ function CalculatorWrapper() {
   }, [lang, i18n]);
 
   useEffect(() => {
-    const TARGET_ORIGIN = '*'; // ideally set to your parent origin
+    const TARGET_ORIGIN = import.meta.env.VITE_PARENT_ORIGIN ?? '*';
 
     let rafId: number | null = null;
 
@@ -79,7 +79,7 @@ export default function App() {
   return (
     <Routes>
       <Route path="/:whiteLabel/:lang" element={<CalculatorWrapper />} />
-      <Route path="/" element={<Navigate to="/gac/en" replace />} />
+      <Route path="/" element={<Navigate to={`/${import.meta.env.VITE_DEFAULT_WHITE_LABEL ?? 'gac'}/en`} replace />} />
     </Routes>
   );
 }

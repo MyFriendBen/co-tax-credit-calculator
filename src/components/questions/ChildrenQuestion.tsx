@@ -18,7 +18,9 @@ export const ChildrenQuestion = memo(function ChildrenQuestion({
 }: ChildrenQuestionProps) {
   const { t } = useTranslation();
 
-  const title = type === '0-5' ? t('questions.children0To5.title') : t('questions.children6To16.title');
+  const questionKey = type === '0-5' ? 'children0To5' : 'children6To16';
+  const title = t(`questions.${questionKey}.title`);
+  const description = t(`questions.${questionKey}.description`);
 
   const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
     // Select all text on focus (if value is "0", it will be selected and replaced on type)
@@ -26,7 +28,7 @@ export const ChildrenQuestion = memo(function ChildrenQuestion({
   };
 
   return (
-    <QuestionLayout title={title}>
+    <QuestionLayout title={title} description={description}>
       <div>
         <Input
           type="number"

@@ -20,7 +20,7 @@ import {
 import { CreditCard } from './results/CreditCard';
 import { FileInPersonQuiz } from './FileInPersonQuiz';
 import { GoogleTranslate } from './GoogleTranslate';
-import { calculateYearlyIncome } from '@/lib/utils/calculations';
+import { calculateTotalAnnualIncome } from '@/lib/utils/calculations';
 import { getFileInPersonLink } from '@/lib/utils/whiteLabelData';
 
 const MAX_HOUSEHOLD_SIZE = 8;
@@ -325,7 +325,7 @@ export function Calculator() {
               <Card className="p-8 bg-[#304e5d] text-white">
                 <h3 className="mb-4 font-oswald text-2xl font-bold">{t('results.nextStepsTitle')}</h3>
                 <p className="mb-6 text-lg">
-                  {t('results.title')} {calculator.result.totalEstimatedBenefit.toLocaleString()} {t('results.titleEnd')}
+                  {t('results.ctaTitle', { amount: calculator.result.totalEstimatedBenefit.toLocaleString() })}
                 </p>
                 <ul className="space-y-3 mb-6">
                   <li className="flex items-start gap-3">
@@ -372,7 +372,7 @@ export function Calculator() {
                     >
                       <FileInPersonQuiz
                         onClose={() => setShowFileInPersonQuiz(false)}
-                        yearlyIncome={calculateYearlyIncome(calculator.formData.incomes)}
+                        yearlyIncome={calculateTotalAnnualIncome(calculator.formData.incomes)}
                         caresForOtherChildren={calculator.formData.headIsCareWorker || calculator.formData.spouseIsCareWorker}
                         whiteLabel={whiteLabel}
                       />

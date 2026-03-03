@@ -48,8 +48,16 @@ export function calculateHouseholdSize(
  */
 export function validateIncomes(incomes: Income[]): boolean {
   return incomes.every(income => {
-    if (!income.frequency || !income.amount) return false;
-    if (income.frequency === 'hourly' && !income.hours) return false;
+    if (!income.frequency) return false;
+
+    const amount = Number(income.amount);
+    if (!Number.isFinite(amount) || amount <= 0) return false;
+
+    if (income.frequency === 'hourly') {
+      const hours = Number(income.hours);
+      if (!Number.isFinite(hours) || hours <= 0) return false;
+    }
+
     return true;
   });
 }

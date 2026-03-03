@@ -26,7 +26,11 @@ export function GoogleTranslate() {
   const initializedRef = useRef(false);
 
   useEffect(() => {
-    if (!containerRef.current || initializedRef.current) return;
+    if (!containerRef.current) return;
+
+    // Reset for reinitialization on language change
+    initializedRef.current = false;
+    containerRef.current.innerHTML = '';
 
     // Set the ID on the container
     containerRef.current.id = idRef.current;

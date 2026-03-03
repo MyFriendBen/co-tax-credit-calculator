@@ -93,6 +93,20 @@ export class MfbApi {
     };
   }
 
+  private async fetchWithTimeout(
+    input: RequestInfo | URL,
+    init: RequestInit,
+    timeoutMs = 15000
+  ): Promise<Response> {
+    const controller = new AbortController();
+    const timer = globalThis.setTimeout(() => controller.abort(), timeoutMs);
+    try {
+      return await fetch(input, { ...init, signal: controller.signal });
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+
   /**
    * Create or update a screen with household data
    */
@@ -101,7 +115,7 @@ export class MfbApi {
     const method = this.getUpsertScreenMethod();
     const data = this.createApiData(formData);
 
-    const response = await fetch(url, {
+    const response = await this.fetchWithTimeout(url, {
       method,
       headers: this.requestHeaders,
       body: JSON.stringify(data),
@@ -129,7 +143,7 @@ export class MfbApi {
 
     const url = `${this.API_DOMAIN}/api/eligibility/${this.uuid}`;
 
-    const response = await fetch(url, {
+    const response = await this.fetchWithTimeout(url, {
       method: 'GET',
       headers: this.requestHeaders,
     });

@@ -87,7 +87,12 @@
     "continue": "Continuar",
     "showResults": "Mostrar mis resultados",
     "calculating": "Calculando...",
-    "startOver": "Comenzar de nuevo"
+    "startOver": "Comenzar de nuevo",
+    "close": "Cerrar"
+  },
+  "progress": {
+    "questionOf": "Pregunta {{current}} de {{total}}",
+    "percentComplete": "{{percent}}% completado"
   },
   "results": {
     "ctaTitle": "Presentar impuestos 2025 y reciba {{amount}} en créditos fiscales",
@@ -113,6 +118,7 @@
     },
     "mfbDescription": "Para ver qué otros beneficios puede ser elegible, haga clic en el botón a continuación para visitar MyFriendBen.",
     "savingsDescription": "Aproveche al máximo su reembolso de impuestos con servicios gratuitos de banca, ahorro y planificación financiera.",
+    "upToAmount": "Hasta {{amount}}",
     "breakdown": "Aquí está el desglose",
     "credits": {
       "coloradoCTC": "Crédito fiscal por hijos de Colorado",
@@ -164,32 +170,37 @@
     "disclaimerLabel": "Importante:"
   },
   "errors": {
+    "errorLabel": "Error",
+    "validationLabel": "Error de validación",
     "validation": "Complete todos los campos de ingresos. Para ingresos por hora, ingrese tanto la tarifa por hora como las horas por semana.",
     "householdSize": "El tamaño máximo del hogar es 8",
     "calculation": "Ocurrió un error al calcular sus créditos fiscales. Por favor, inténtelo de nuevo.",
     "generic": "Algo salió mal. Inténtalo de nuevo o comunícate con el soporte si el problema persiste."
   },
   "filingQuiz": {
+    "title": "Encuentre la mejor manera de presentar sus impuestos",
+    "subtitle": "Responda algunas preguntas para obtener recomendaciones personalizadas",
+    "progress": "Pregunta {{current}} de {{total}}",
     "intro": "La ayuda gratuita para presentar impuestos en persona será limitada en 2026. La buena noticia es que puede presentar sus impuestos en línea de forma gratuita, con ayuda paso a paso, y recibir su reembolso más rápido. Responda algunas preguntas simples a continuación para ver si presentar en línea es una buena opción para usted.",
     "questions": {
       "computerComfort": {
         "title": "En una escala del 1 al 5, ¿qué tan cómodo se siente usando una computadora? (siendo 1 el menos cómodo y 5 el más cómodo)",
         "levels": {
-          "1": "1 - Nada cómodo",
-          "2": "2",
-          "3": "3",
-          "4": "4",
-          "5": "5 - Muy cómodo"
+          "1": { "label": "1 - Nada cómodo" },
+          "2": { "label": "2" },
+          "3": { "label": "3" },
+          "4": { "label": "4" },
+          "5": { "label": "5 - Muy cómodo" }
         }
       },
       "taxComfort": {
         "title": "En una escala del 1 al 5, ¿qué tan cómodo se siente presentando sus propios impuestos? (siendo 1 el menos cómodo y 5 el más cómodo)",
         "levels": {
-          "1": "1 - Nada cómodo",
-          "2": "2",
-          "3": "3",
-          "4": "4",
-          "5": "5 - Muy cómodo"
+          "1": { "label": "1 - Nada cómodo" },
+          "2": { "label": "2" },
+          "3": { "label": "3" },
+          "4": { "label": "4" },
+          "5": { "label": "5 - Muy cómodo" }
         }
       },
       "lifeEvents": {

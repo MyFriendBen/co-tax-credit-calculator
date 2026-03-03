@@ -9,8 +9,13 @@ interface ReviewQuestionProps {
 }
 
 export const ReviewQuestion = memo(function ReviewQuestion({ formData }: ReviewQuestionProps) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const annualIncome = formData.hasIncome ? calculateTotalAnnualIncome(formData.incomes) : 0;
+  const formattedIncome = new Intl.NumberFormat(i18n.language, {
+    style: 'currency',
+    currency: 'USD',
+    maximumFractionDigits: 0,
+  }).format(annualIncome);
 
   return (
     <QuestionLayout
@@ -44,7 +49,7 @@ export const ReviewQuestion = memo(function ReviewQuestion({ formData }: ReviewQ
             <div className="flex justify-between items-start">
               <span className="text-gray-600 text-sm">{t('questions.review.estimatedYearlyIncome')}</span>
               <span className="font-medium">
-                ${annualIncome.toLocaleString()}
+                {formattedIncome}
               </span>
             </div>
           </div>

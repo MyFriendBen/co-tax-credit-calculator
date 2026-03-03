@@ -21,7 +21,11 @@ import { CreditCard } from './results/CreditCard';
 import { FileInPersonQuiz } from './FileInPersonQuiz';
 import { GoogleTranslate } from './GoogleTranslate';
 import { calculateTotalAnnualIncome } from '@/lib/utils/calculations';
-import { getFileInPersonLink } from '@/lib/utils/whiteLabelData';
+import {
+  getFileInPersonLink,
+  generateSavingsCollaborativeLink,
+  getPaidFilingOptionsLink,
+} from '@/lib/utils/whiteLabelData';
 
 const MAX_HOUSEHOLD_SIZE = 8;
 
@@ -30,8 +34,9 @@ const MAX_HOUSEHOLD_SIZE = 8;
  * Uses custom hooks for state management and small focused question components
  */
 export function Calculator() {
-  const { t } = useTranslation();
-  const { whiteLabel } = useParams<{ whiteLabel: string; lang: string }>();
+  const { t, i18n } = useTranslation();
+  const { whiteLabel, lang } = useParams<{ whiteLabel: string; lang: string }>();
+  const locale = lang === 'es' ? 'es' : i18n.language;
   const calculator = useCalculator();
   const incomeManager = useIncomeManager({
     incomes: calculator.formData.incomes,
@@ -52,7 +57,7 @@ export function Calculator() {
 
   const householdSizeError =
     householdSize > MAX_HOUSEHOLD_SIZE
-      ? `The max household size is ${MAX_HOUSEHOLD_SIZE}`
+      ? t('errors.householdSize')
       : undefined;
 
   // Only show validation error if user has attempted to continue
@@ -65,6 +70,15 @@ export function Calculator() {
 
   const handleContinue = () => {
     setAttemptedContinue(true);
+
+    // Check household size validation on children questions
+    if (
+      (calculator.currentQuestion === 'children-0-5' ||
+        calculator.currentQuestion === 'children-6-16') &&
+      householdSizeError
+    ) {
+      return;
+    }
 
     // Check income validation if on income-details page
     if (calculator.currentQuestion === 'income-details' && !validateIncomes(calculator.formData.incomes)) {
@@ -154,9 +168,9 @@ export function Calculator() {
             <div>
               <div className="flex justify-between text-sm text-gray-600 mb-2">
                 <span>
-                  Question {calculator.currentIndex + 1} of {calculator.allQuestions.length}
+                  {t('progress.questionOf', { current: calculator.currentIndex + 1, total: calculator.allQuestions.length })}
                 </span>
-                <span>{Math.round(calculator.progress)}% complete</span>
+                <span>{t('progress.percentComplete', { percent: Math.round(calculator.progress) })}</span>
               </div>
               <Progress value={calculator.progress} className="h-2" />
             </div>
@@ -272,10 +286,10 @@ export function Calculator() {
                   {calculator.error && (
                     <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg">
                       <p className="text-red-800 text-sm">
-                        <strong>Error:</strong> {calculator.error}
+                        <strong>{t('errors.errorLabel')}:</strong> {calculator.error}
                       </p>
                       <p className="text-red-600 text-sm mt-2">
-                        Please try again or contact support if the problem persists.
+                        {t('errors.generic')}
                       </p>
                     </div>
                   )}
@@ -283,7 +297,7 @@ export function Calculator() {
                   {incomeValidationError && (
                     <div className="mt-4 p-4 bg-amber-50 border border-amber-200 rounded-lg">
                       <p className="text-amber-800 text-sm">
-                        <strong>Validation Error:</strong> {incomeValidationError}
+                        <strong>{t('errors.validationLabel')}:</strong> {incomeValidationError}
                       </p>
                     </div>
                   )}
@@ -386,7 +400,7 @@ export function Calculator() {
                   </p>
                   <Button asChild className="w-full bg-white text-[#304e5d] hover:bg-gray-100 text-base">
                     <a
-                      href={`${import.meta.env.VITE_MFB_FRONTEND_DOMAIN}/co/step-1?referrer=gac`}
+                      href={`${import.meta.env.VITE_MFB_FRONTEND_DOMAIN}/co/step-1?referrer=${whiteLabel ?? 'gac'}`}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -401,7 +415,7 @@ export function Calculator() {
                   </p>
                   <Button asChild className="w-full bg-white text-[#304e5d] hover:bg-gray-100 text-base">
                     <a
-                      href="https://taxrefund.savingscollaborative.org/?lang=en"
+                      href={generateSavingsCollaborativeLink(locale)}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -441,7 +455,7 @@ export function Calculator() {
                   <ul className="space-y-2">
                     <li>
                       <a
-                        href="https://co.myfriendben.org/paid-tax-filing-options/?utm_source=online&utm_medium=calculator&utm_campaign=paid_filing_options&utm_id=get_ahead&utm_term=english&utm_content=mfb_page"
+                        href={getPaidFilingOptionsLink(locale)}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-white underline hover:text-white/80"

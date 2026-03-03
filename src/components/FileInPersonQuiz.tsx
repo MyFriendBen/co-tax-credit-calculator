@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { X } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
@@ -48,6 +48,18 @@ export function FileInPersonQuiz({
   });
   const [outcome, setOutcome] = useState<FilingOutcome | null>(null);
   const [direction, setDirection] = useState<"forward" | "backward">("forward");
+  const nextTimerRef = useRef<number | null>(null);
+
+  const scheduleNext = () => {
+    if (nextTimerRef.current) window.clearTimeout(nextTimerRef.current);
+    nextTimerRef.current = window.setTimeout(() => handleNext(), 200);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (nextTimerRef.current) window.clearTimeout(nextTimerRef.current);
+    };
+  }, []);
 
   // Calculate outcome when we reach the results
   const handleComplete = () => {
@@ -79,7 +91,7 @@ export function FileInPersonQuiz({
             key={level}
             onClick={() => {
               setAnswers(prev => ({ ...prev, computerComfort: level }));
-              setTimeout(handleNext, 200);
+              scheduleNext();
             }}
             className={`w-full p-4 text-left rounded-lg border-2 transition-all ${
               answers.computerComfort === level
@@ -110,7 +122,7 @@ export function FileInPersonQuiz({
             key={level}
             onClick={() => {
               setAnswers(prev => ({ ...prev, taxComfort: level }));
-              setTimeout(handleNext, 200);
+              scheduleNext();
             }}
             className={`w-full p-4 text-left rounded-lg border-2 transition-all ${
               answers.taxComfort === level
@@ -200,7 +212,7 @@ export function FileInPersonQuiz({
         <Button
           onClick={() => {
             setAnswers(prev => ({ ...prev, received1099: true }));
-            setTimeout(handleNext, 200);
+            scheduleNext();
           }}
           className="w-full h-auto py-4 bg-[#304e5d] text-white hover:bg-[#263d48]"
         >
@@ -209,7 +221,7 @@ export function FileInPersonQuiz({
         <Button
           onClick={() => {
             setAnswers(prev => ({ ...prev, received1099: false }));
-            setTimeout(handleNext, 200);
+            scheduleNext();
           }}
           className="w-full h-auto py-4 bg-[#304e5d] text-white hover:bg-[#263d48]"
         >
@@ -231,7 +243,7 @@ export function FileInPersonQuiz({
         <Button
           onClick={() => {
             setAnswers(prev => ({ ...prev, taxIdType: "ssn" }));
-            setTimeout(handleNext, 200);
+            scheduleNext();
           }}
           className="w-full h-auto py-4 bg-[#304e5d] text-white hover:bg-[#263d48]"
         >
@@ -240,7 +252,7 @@ export function FileInPersonQuiz({
         <Button
           onClick={() => {
             setAnswers(prev => ({ ...prev, taxIdType: "itin" }));
-            setTimeout(handleNext, 200);
+            scheduleNext();
           }}
           className="w-full h-auto py-4 bg-[#304e5d] text-white hover:bg-[#263d48]"
         >
@@ -262,7 +274,7 @@ export function FileInPersonQuiz({
         <Button
           onClick={() => {
             setAnswers(prev => ({ ...prev, filingYear: "2025_only" }));
-            setTimeout(handleNext, 200);
+            scheduleNext();
           }}
           className="w-full h-auto py-4 bg-[#304e5d] text-white hover:bg-[#263d48]"
         >
@@ -271,7 +283,7 @@ export function FileInPersonQuiz({
         <Button
           onClick={() => {
             setAnswers(prev => ({ ...prev, filingYear: "multiple_years" }));
-            setTimeout(handleNext, 200);
+            scheduleNext();
           }}
           className="w-full h-auto py-4 bg-[#304e5d] text-white hover:bg-[#263d48]"
         >
@@ -293,7 +305,7 @@ export function FileInPersonQuiz({
         <Button
           onClick={() => {
             setAnswers(prev => ({ ...prev, needsNonEnglishSpanishHelp: true }));
-            setTimeout(handleNext, 200);
+            scheduleNext();
           }}
           className="w-full h-auto py-4 bg-[#304e5d] text-white hover:bg-[#263d48]"
         >
@@ -302,7 +314,7 @@ export function FileInPersonQuiz({
         <Button
           onClick={() => {
             setAnswers(prev => ({ ...prev, needsNonEnglishSpanishHelp: false }));
-            setTimeout(handleNext, 200);
+            scheduleNext();
           }}
           className="w-full h-auto py-4 bg-[#304e5d] text-white hover:bg-[#263d48]"
         >
@@ -521,7 +533,7 @@ export function FileInPersonQuiz({
         <button
           onClick={onClose}
           className="text-gray-400 hover:text-gray-600 transition-colors"
-          aria-label="Close"
+          aria-label={t("navigation.close")}
         >
           <X className="w-6 h-6" />
         </button>

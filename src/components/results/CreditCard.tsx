@@ -42,9 +42,14 @@ export const CreditCard = memo(function CreditCard({
   explanation,
   reasons,
 }: CreditCardProps) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const config = STATUS_BASE_CONFIG[status];
   const StatusIcon = config.icon;
+  const formattedBenefit = new Intl.NumberFormat(i18n.language, {
+    style: 'currency',
+    currency: 'USD',
+    maximumFractionDigits: 0,
+  }).format(estimatedBenefit);
 
   return (
     <Card className={`p-6 ${config.bg} ${config.border}`}>
@@ -61,7 +66,7 @@ export const CreditCard = memo(function CreditCard({
 
         {status === 'eligible' && estimatedBenefit > 0 && (
           <div className="text-3xl text-[#304e5d] font-oswald">
-            Up to ${estimatedBenefit.toLocaleString()}
+            {t('results.upToAmount', { amount: formattedBenefit })}
           </div>
         )}
 

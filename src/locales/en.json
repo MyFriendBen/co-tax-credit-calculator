@@ -89,7 +89,12 @@
     "calculating": "Calculating...",
     "startOver": "Start Over",
     "next": "NEXT",
-    "seeMyOptions": "SEE MY OPTIONS"
+    "seeMyOptions": "SEE MY OPTIONS",
+    "close": "Close"
+  },
+  "progress": {
+    "questionOf": "Question {{current}} of {{total}}",
+    "percentComplete": "{{percent}}% complete"
   },
   "results": {
     "ctaTitle": "File 2025 Taxes & Receive {{amount}} in Tax Credits",
@@ -115,6 +120,7 @@
     },
     "mfbDescription": "To see what other benefits you may be eligible for, click the button below to visit MyFriendBen.",
     "savingsDescription": "Make the most of your tax return with free banking, savings and financial planning services.",
+    "upToAmount": "Up to {{amount}}",
     "breakdown": "Here's the breakdown",
     "credits": {
       "coloradoCTC": "Colorado Child Tax Credit",
@@ -166,6 +172,8 @@
     "disclaimerLabel": "Important:"
   },
   "errors": {
+    "errorLabel": "Error",
+    "validationLabel": "Validation Error",
     "validation": "Please fill in all income fields. For hourly income, enter both the hourly rate and hours per week.",
     "householdSize": "The max household size is 8",
     "calculation": "An error occurred while calculating your tax credits. Please try again.",

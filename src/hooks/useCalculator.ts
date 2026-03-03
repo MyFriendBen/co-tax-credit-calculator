@@ -98,6 +98,7 @@ export function useCalculator() {
     setFormData(prev => {
       const next = { ...prev, ...updates };
       if (!next.isMarried) next.spouseIsCareWorker = false;
+      if (updates.hasIncome === false) next.incomes = [];
       return next;
     });
   }, []);

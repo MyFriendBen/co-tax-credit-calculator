@@ -86,7 +86,13 @@ export function getGoogleTranslateLanguage(): string | null {
 
   if (!cookie) return null;
 
-  const value = decodeURIComponent(cookie.split('=')[1]);
+  const raw = cookie.split('=')[1] ?? '';
+  let value: string;
+  try {
+    value = decodeURIComponent(raw);
+  } catch {
+    return null;
+  }
   // Format is "/en/es" - we want the target language (second part)
   const parts = value.split('/').filter(Boolean);
   return parts.length >= 2 ? parts[1] : null;
@@ -100,5 +106,5 @@ export function generateSavingsCollaborativeLink(lang: string): string {
   // Check for Google Translate language first, fall back to app locale
   const googleTranslateLang = getGoogleTranslateLanguage();
   const effectiveLang = googleTranslateLang || lang;
-  return `https://taxrefund.savingscollaborative.org/?lang=${effectiveLang}`;
+  return `https://taxrefund.savingscollaborative.org/?lang=${encodeURIComponent(effectiveLang)}`;
 }

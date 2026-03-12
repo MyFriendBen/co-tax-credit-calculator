@@ -4,12 +4,11 @@
     "subtitle": "Find out how much you could receive in tax credits",
     "description": "Families with children in Colorado now have access to more tax credits than ever before! In 2025, families may receive between $2k and $10k per child in credits when filing their taxes. In less than 60 seconds, you can find out how much you could benefit by answering these simple questions.",
     "startButton": "Get Started",
-    "howItWorksTitle": "Here's how this works:",
+    "howItWorksTitle": "Here's how it works:",
     "howItWorks": {
-      "step1": "We'll ask you simple questions about your family and income",
-      "step2": "One question at a time — no confusing forms to fill out",
-      "step3": "It takes about 5 minutes to complete",
-      "step4": "You'll get an estimate of tax credits you could receive"
+      "step1": "Answer a few quick questions about your family and income—it only takes seconds.",
+      "step2": "Get an instant estimate of the tax credits you may qualify for.",
+      "step3": "Start filing your taxes with ease."
     }
   },
   "questions": {

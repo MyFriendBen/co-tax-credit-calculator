@@ -92,7 +92,7 @@ export function Calculator() {
 
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6" style={{ paddingBottom: '3rem' }}>
       {/* Google Translate Widget */}
       <GoogleTranslate />
 
@@ -140,12 +140,6 @@ export function Calculator() {
                     <li className="flex items-start gap-3">
                       <Check className="h-5 w-5 text-[#304e5d] mt-0.5 flex-shrink-0" />
                       <span className="text-gray-700">{t('welcome.howItWorks.step3')}</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <Check className="h-5 w-5 text-[#304e5d] mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-700">
-                        {t('welcome.howItWorks.step4')}
-                      </span>
                     </li>
                   </ul>
                 </div>
@@ -432,7 +426,8 @@ export function Calculator() {
                         href="https://myfreetaxes.com/?utm_source=online&utm_medium=calculator&utm_campaign=file_for_free_online&utm_id=get_ahead&utm_term=english&utm_content=myfreetaxes"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-white underline hover:text-white/80"
+                        className="text-white hover:text-white/80"
+                        style={{ textDecoration: 'underline' }}
                       >
                         {t('results.buttons.fileOnlineDIY')}
                       </a>
@@ -442,7 +437,8 @@ export function Calculator() {
                         href={getFileInPersonLink(whiteLabel)}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-white underline hover:text-white/80"
+                        className="text-white hover:text-white/80"
+                        style={{ textDecoration: 'underline' }}
                       >
                         {t('results.buttons.fileInPerson')}
                       </a>
@@ -458,7 +454,8 @@ export function Calculator() {
                         href={getPaidFilingOptionsLink(locale)}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-white underline hover:text-white/80"
+                        className="text-white hover:text-white/80"
+                        style={{ textDecoration: 'underline' }}
                       >
                         {t('results.buttons.paidPreparers')}
                       </a>
@@ -468,7 +465,8 @@ export function Calculator() {
                         href="https://www.freetaxusa.com/?utm_source=get_ahead_colorado"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-white underline hover:text-white/80"
+                        className="text-white hover:text-white/80"
+                        style={{ textDecoration: 'underline' }}
                       >
                         {t('results.buttons.fileOnlineSupport')}
                       </a>

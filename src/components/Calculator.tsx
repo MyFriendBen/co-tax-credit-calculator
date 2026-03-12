@@ -92,7 +92,7 @@ export function Calculator() {
 
 
   return (
-    <div className="space-y-6" style={{ paddingBottom: '3rem' }}>
+    <div className="space-y-6 pb-12">
       {/* Google Translate Widget */}
       <GoogleTranslate />
 
@@ -426,8 +426,7 @@ export function Calculator() {
                         href="https://myfreetaxes.com/?utm_source=online&utm_medium=calculator&utm_campaign=file_for_free_online&utm_id=get_ahead&utm_term=english&utm_content=myfreetaxes"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-white hover:text-white/80"
-                        style={{ textDecoration: 'underline' }}
+                        className="text-white underline hover:text-white/80"
                       >
                         {t('results.buttons.fileOnlineDIY')}
                       </a>
@@ -437,8 +436,7 @@ export function Calculator() {
                         href={getFileInPersonLink(whiteLabel)}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-white hover:text-white/80"
-                        style={{ textDecoration: 'underline' }}
+                        className="text-white underline hover:text-white/80"
                       >
                         {t('results.buttons.fileInPerson')}
                       </a>
@@ -454,8 +452,7 @@ export function Calculator() {
                         href={getPaidFilingOptionsLink(locale)}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-white hover:text-white/80"
-                        style={{ textDecoration: 'underline' }}
+                        className="text-white underline hover:text-white/80"
                       >
                         {t('results.buttons.paidPreparers')}
                       </a>
@@ -465,8 +462,7 @@ export function Calculator() {
                         href="https://www.freetaxusa.com/?utm_source=get_ahead_colorado"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-white hover:text-white/80"
-                        style={{ textDecoration: 'underline' }}
+                        className="text-white underline hover:text-white/80"
                       >
                         {t('results.buttons.fileOnlineSupport')}
                       </a>

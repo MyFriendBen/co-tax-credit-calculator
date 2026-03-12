@@ -84,7 +84,7 @@ export function GoogleTranslate() {
   }, [i18n.language]);
 
   return (
-    <div ref={containerRef} className="pl-4">
+    <div ref={containerRef}>
       <style>{`
         /* Style Google Translate widget – single horizontal line */
         .goog-te-gadget {

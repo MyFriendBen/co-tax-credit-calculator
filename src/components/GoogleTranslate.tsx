@@ -51,6 +51,20 @@ export function GoogleTranslate() {
           );
           initializedRef.current = true;
           clearInterval(interval);
+
+          // Force inline layout after widget renders — Google's external
+          // stylesheet sets img { display: block } with high specificity
+          // that CSS !important alone can't override, so we patch inline styles.
+          setTimeout(() => {
+            const gadget = containerRef.current?.querySelector('.goog-te-gadget');
+            if (gadget) {
+              (gadget as HTMLElement).style.cssText = 'white-space:nowrap;font-size:13px;color:#666;font-family:arial,sans-serif;';
+              const img = gadget.querySelector('img');
+              if (img) img.style.cssText += 'display:inline!important;vertical-align:middle;';
+              const combo = gadget.querySelector('.goog-te-combo') as HTMLElement | null;
+              if (combo) combo.style.cssText += 'border:1px solid #ccc!important;border-radius:2px;padding:4px 8px;margin-right:12px;font-size:13px;';
+            }
+          }, 100);
         } catch (error) {
           console.error('Error initializing Google Translate:', error);
           clearInterval(interval);
@@ -70,35 +84,47 @@ export function GoogleTranslate() {
   }, [i18n.language]);
 
   return (
-    <div ref={containerRef} className="pl-4">
+    <div ref={containerRef}>
       <style>{`
-        /* Style Google Translate widget to match original */
+        /* Style Google Translate widget – single horizontal line */
+        .goog-te-gadget {
+          white-space: nowrap !important;
+          font-size: 13px !important;
+          color: #666 !important;
+          font-family: arial, sans-serif !important;
+          line-height: normal !important;
+        }
+
+        .goog-te-gadget * {
+          display: inline !important;
+          vertical-align: middle !important;
+          white-space: nowrap !important;
+        }
+
         .goog-te-combo {
-          border: 1px solid #ccc !important;
-          border-radius: 4px !important;
-          padding: 4px 8px !important;
+          display: inline-block !important;
+          border: 1px solid #999 !important;
+          border-radius: 2px !important;
+          padding: 8px 12px !important;
           font-size: 14px !important;
           background-color: white !important;
+          margin-right: 12px !important;
         }
 
-        .goog-te-gadget {
-          font-size: 0 !important;
-          line-height: 1 !important;
-        }
-
-        .goog-te-gadget > span {
-          display: inline-block !important;
+        .goog-te-gadget img,
+        .goog-te-gadget a img,
+        .VIpgJd-ZVi9od-l4eHX-hSRGPd img {
+          display: inline !important;
+          height: 14px !important;
+          width: auto !important;
           vertical-align: middle !important;
+          margin: 0 2px !important;
         }
 
-        .goog-te-gadget > span:first-child {
-          font-size: 14px !important;
-          margin-right: 8px !important;
-        }
-
-        .goog-te-gadget .goog-te-combo {
-          margin: 0 8px 0 0 !important;
-          vertical-align: middle !important;
+        .goog-te-gadget a {
+          font-size: 13px !important;
+          color: #666 !important;
+          text-decoration: none !important;
         }
 
         /* Hide the Google Translate banner */

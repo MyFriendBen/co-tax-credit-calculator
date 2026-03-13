@@ -6,10 +6,9 @@
     "startButton": "Comenzar",
     "howItWorksTitle": "Así es como funciona:",
     "howItWorks": {
-      "step1": "Le haremos preguntas simples sobre su familia e ingresos",
-      "step2": "Una pregunta a la vez: no hay formularios confusos que completar",
-      "step3": "Toma alrededor de 5 minutos completar",
-      "step4": "Obtendrá una estimación de los créditos fiscales que podría recibir"
+      "step1": "Responda unas pocas preguntas rápidas sobre su familia e ingresos—solo toma segundos.",
+      "step2": "Obtenga una estimación instantánea de los créditos fiscales para los que podría calificar.",
+      "step3": "Comience a declarar sus impuestos con facilidad."
     }
   },
   "questions": {

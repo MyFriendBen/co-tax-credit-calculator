@@ -66,7 +66,7 @@ function CalculatorWrapper() {
 
   return (
     <div ref={contentRef}>
-      <main className="w-full sm:px-6 lg:px-8">
+      <main className="w-full px-4 sm:px-6 lg:px-8">
         <div className="max-w-[1200px] mx-auto">
           <Calculator />
         </div>

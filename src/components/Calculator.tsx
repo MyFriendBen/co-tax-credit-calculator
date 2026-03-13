@@ -92,7 +92,7 @@ export function Calculator() {
 
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 pb-12">
       {/* Google Translate Widget */}
       <GoogleTranslate />
 
@@ -140,12 +140,6 @@ export function Calculator() {
                     <li className="flex items-start gap-3">
                       <Check className="h-5 w-5 text-[#304e5d] mt-0.5 flex-shrink-0" />
                       <span className="text-gray-700">{t('welcome.howItWorks.step3')}</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <Check className="h-5 w-5 text-[#304e5d] mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-700">
-                        {t('welcome.howItWorks.step4')}
-                      </span>
                     </li>
                   </ul>
                 </div>

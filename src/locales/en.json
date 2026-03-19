@@ -96,7 +96,7 @@
     "percentComplete": "{{percent}}% complete"
   },
   "results": {
-    "ctaTitle": "File 2025 Taxes & Receive {{amount}} in Tax Credits",
+    "ctaTitle": "File 2025 taxes & receive ${{amount}} in tax credits",
     "summaryTitle": "You could receive up to",
     "summarySubtitle": "in tax credits based on what you told us",
     "nextStepsTitle": "Your next steps:",

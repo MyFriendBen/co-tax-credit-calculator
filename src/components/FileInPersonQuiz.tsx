@@ -245,7 +245,7 @@ export function FileInPersonQuiz({
             setAnswers(prev => ({ ...prev, taxIdType: "ssn" }));
             scheduleNext();
           }}
-          className="w-full h-auto py-4 bg-[#304e5d] text-white hover:bg-[#263d48]"
+          className="w-full h-auto py-4 bg-[#304e5d] text-white hover:bg-[#263d48] whitespace-normal"
         >
           {t("filingQuiz.questions.taxIdType.ssn")}
         </Button>
@@ -254,7 +254,7 @@ export function FileInPersonQuiz({
             setAnswers(prev => ({ ...prev, taxIdType: "itin" }));
             scheduleNext();
           }}
-          className="w-full h-auto py-4 bg-[#304e5d] text-white hover:bg-[#263d48]"
+          className="w-full h-auto py-4 bg-[#304e5d] text-white hover:bg-[#263d48] whitespace-normal"
         >
           {t("filingQuiz.questions.taxIdType.itin")}
         </Button>

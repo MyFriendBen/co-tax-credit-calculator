@@ -94,7 +94,7 @@
     "percentComplete": "{{percent}}% completado"
   },
   "results": {
-    "ctaTitle": "Presentar impuestos 2025 y reciba {{amount}} en créditos fiscales",
+    "ctaTitle": "Presentar impuestos 2025 y reciba ${{amount}} en créditos fiscales",
     "summaryTitle": "Podrías recibir hasta",
     "summarySubtitle": "en créditos fiscales según lo que nos contó",
     "nextStepsTitle": "Sus próximos pasos:",

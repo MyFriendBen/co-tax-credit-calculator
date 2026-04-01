@@ -61,13 +61,14 @@ See `.env.example` for a template.
 # Create Heroku app (first time only)
 heroku create app-name --team your-team
 
-# Set required environment variables and deploy
+# Set required environment variables (first time or as needed)
 heroku config:set \
   VITE_MFB_API_KEY=your_key \
   VITE_MFB_DOMAIN=https://api.myfriendben.org \
   VITE_MFB_FRONTEND_DOMAIN=https://screener.myfriendben.org \
   --app app-name
 
+# Deploy
 git push heroku main
 ```
 

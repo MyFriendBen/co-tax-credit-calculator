@@ -75,36 +75,8 @@ export function getPaidFilingOptionsLink(lang: string = 'en'): string {
 }
 
 /**
- * Gets the current Google Translate target language from the googtrans cookie.
- * The cookie format is "/sourceLang/targetLang" (e.g., "/en/es").
- * Returns null if no Google Translate language is selected.
- */
-export function getGoogleTranslateLanguage(): string | null {
-  if (typeof document === 'undefined') return null;
-
-  const cookie = document.cookie.split('; ').find((row) => row.startsWith('googtrans='));
-
-  if (!cookie) return null;
-
-  const raw = cookie.split('=')[1] ?? '';
-  let value: string;
-  try {
-    value = decodeURIComponent(raw);
-  } catch {
-    return null;
-  }
-  // Format is "/en/es" - we want the target language (second part)
-  const parts = value.split('/').filter(Boolean);
-  return parts.length >= 2 ? parts[1] : null;
-}
-
-/**
  * Generate Savings Collaborative link with language parameter
- * Checks Google Translate language first, then falls back to app locale
  */
 export function generateSavingsCollaborativeLink(lang: string): string {
-  // Check for Google Translate language first, fall back to app locale
-  const googleTranslateLang = getGoogleTranslateLanguage();
-  const effectiveLang = googleTranslateLang || lang;
-  return `https://taxrefund.savingscollaborative.org/?lang=${encodeURIComponent(effectiveLang)}`;
+  return `https://taxrefund.savingscollaborative.org/?lang=${encodeURIComponent(lang)}`;
 }

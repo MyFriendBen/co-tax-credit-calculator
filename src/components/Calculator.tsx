@@ -19,7 +19,6 @@ import {
 } from './questions';
 import { CreditCard } from './results/CreditCard';
 import { FileInPersonQuiz } from './FileInPersonQuiz';
-import { GoogleTranslate } from './GoogleTranslate';
 import { calculateTotalAnnualIncome } from '@/lib/utils/calculations';
 import {
   getFileInPersonLink,
@@ -93,9 +92,6 @@ export function Calculator() {
 
   return (
     <div className="space-y-6 pb-12">
-      {/* Google Translate Widget */}
-      <GoogleTranslate />
-
       <AnimatePresence mode="wait">
         {/* Welcome Screen */}
         {calculator.showWelcome && (

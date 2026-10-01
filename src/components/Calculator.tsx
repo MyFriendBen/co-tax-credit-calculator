@@ -510,6 +510,7 @@ export function Calculator() {
                         estimatedBenefit={credit.estimatedBenefit}
                         explanation={credit.explanation}
                         reasons={credit.reasons}
+                        warning={credit.warning}
                       />
                     ))}
                 </div>

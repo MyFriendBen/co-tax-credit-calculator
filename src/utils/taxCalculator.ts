@@ -44,6 +44,7 @@ export interface CreditResult {
   estimatedBenefit: number;
   explanation: string;
   reasons: string[];
+  warning?: string;
 }
 
 export interface TaxCreditResults {

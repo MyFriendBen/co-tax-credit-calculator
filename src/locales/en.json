@@ -120,6 +120,7 @@
     "mfbDescription": "To see what other benefits you may be eligible for, click the button below to visit MyFriendBen.",
     "savingsDescription": "Make the most of your tax return with free banking, savings and financial planning services.",
     "upToAmount": "Up to {{amount}}",
+    "priorTaxYearWarning": "These results are for the {{priorYear}} tax year. You can claim this credit on your {{priorYear}} tax return, even if you file it after the April 15, {{currentYear}} deadline.",
     "breakdown": "Here's the breakdown",
     "credits": {
       "coloradoCTC": "Colorado Child Tax Credit",

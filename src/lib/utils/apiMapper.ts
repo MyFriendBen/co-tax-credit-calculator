@@ -2,7 +2,7 @@ import type { TaxCredit, TaxCreditId } from '@/services/mfbApi';
 import type { TaxCreditResults, CreditResult } from '@/utils/taxCalculator';
 import type { CalculatorFormData } from '@/lib/schemas/calculator.schema';
 
-type TranslationFunction = (key: string) => string;
+type TranslationFunction = (key: string, options?: Record<string, unknown>) => string;
 
 /**
  * Maps API tax credit results to the UI format
@@ -14,8 +14,18 @@ export function mapApiResultsToTaxCreditResults(
 ): TaxCreditResults {
   // Create a map for easy lookup
   const resultsMap = new Map<TaxCreditId, number>();
+  const priorTaxYearCredits = new Set<TaxCreditId>();
   apiResults.forEach(credit => {
     resultsMap.set(credit.id, credit.value);
+    if (credit.isPriorTaxYear) priorTaxYearCredits.add(credit.id);
+  });
+
+  // The API checks the program is on last year's tax year; the years here follow
+  // today's date, as the MyFriendBen results page does.
+  const currentYear = new Date().getFullYear();
+  const priorTaxYearWarning = t('results.priorTaxYearWarning', {
+    priorYear: currentYear - 1,
+    currentYear,
   });
 
   // Helper to create credit result
@@ -33,6 +43,7 @@ export function mapApiResultsToTaxCreditResults(
       estimatedBenefit: value,
       explanation: isEligible ? eligibleExplanation : ineligibleExplanation,
       reasons: [],
+      warning: priorTaxYearCredits.has(creditId) ? priorTaxYearWarning : undefined,
     };
   };
 

@@ -118,6 +118,7 @@
     "mfbDescription": "Para ver qué otros beneficios puede ser elegible, haga clic en el botón a continuación para visitar MyFriendBen.",
     "savingsDescription": "Aproveche al máximo su reembolso de impuestos con servicios gratuitos de banca, ahorro y planificación financiera.",
     "upToAmount": "Hasta {{amount}}",
+    "priorTaxYearWarning": "Estos resultados corresponden al año fiscal {{priorYear}}. Puede reclamar este crédito en su declaración de impuestos {{priorYear}}, incluso si la presenta después de la fecha límite del 15 de abril de {{currentYear}}.",
     "breakdown": "Aquí está el desglose",
     "credits": {
       "coloradoCTC": "Crédito fiscal por hijos de Colorado",

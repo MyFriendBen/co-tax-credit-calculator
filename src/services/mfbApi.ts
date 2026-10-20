@@ -13,7 +13,16 @@ export interface TaxCredit {
   value: number;
   external_name: string;
   estimated_value: number;
+  /** The API decided these results are for last year's taxes (see PRIOR_TAX_YEAR_LABEL). */
+  isPriorTaxYear: boolean;
 }
+
+/**
+ * Label prefix of the API's prior-tax-year warning, `warning._prior_tax_year_<id>-message`.
+ * The API only sends it when the program is on last year's tax year; the text itself
+ * lives in this app's locale files.
+ */
+const PRIOR_TAX_YEAR_LABEL = 'warning._prior_tax_year_';
 
 export interface ApiIncomeStream {
   type: 'wages';
@@ -49,6 +58,9 @@ export interface ApiEligibilityResponse {
   programs: Array<{
     external_name: string;
     estimated_value: number;
+    warning_messages: Array<{
+      message: { label: string; default_message: string };
+    }>;
   }>;
 }
 
@@ -162,6 +174,9 @@ export class MfbApi {
           value: program.estimated_value,
           external_name: program.external_name,
           estimated_value: program.estimated_value,
+          isPriorTaxYear: (program.warning_messages ?? []).some(warning =>
+            warning.message.label.startsWith(PRIOR_TAX_YEAR_LABEL)
+          ),
         });
       }
     }

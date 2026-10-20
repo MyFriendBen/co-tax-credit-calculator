@@ -9,6 +9,7 @@ interface CreditCardProps {
   estimatedBenefit: number;
   explanation: string;
   reasons: string[];
+  warning?: string;
 }
 
 const STATUS_BASE_CONFIG = {
@@ -41,6 +42,7 @@ export const CreditCard = memo(function CreditCard({
   estimatedBenefit,
   explanation,
   reasons,
+  warning,
 }: CreditCardProps) {
   const { t, i18n } = useTranslation();
   const config = STATUS_BASE_CONFIG[status];
@@ -71,6 +73,13 @@ export const CreditCard = memo(function CreditCard({
         )}
 
         <p className="text-gray-700">{explanation}</p>
+
+        {warning && (
+          <div className="flex items-start gap-2 p-3 bg-amber-50 border border-amber-200 rounded-lg">
+            <AlertCircle className="h-4 w-4 text-amber-700 mt-0.5 flex-shrink-0" />
+            <p className="text-sm text-amber-900">{warning}</p>
+          </div>
+        )}
 
         {reasons.length > 0 && (
           <div className="pt-3 border-t border-gray-300">

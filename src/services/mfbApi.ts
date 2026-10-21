@@ -82,6 +82,12 @@ export class MfbApi {
     'co_tax_credit_care_worker',
   ];
 
+  // Programs that moved to the API's federal white label, which every white label sees,
+  // under the slot they used to fill. The federal EITC replaced `co_tax_credit_eitc`.
+  private readonly FEDERAL_CREDIT_SLOTS: Record<string, TaxCreditId> = {
+    federal_eitc: 'co_tax_credit_eitc',
+  };
+
   private uuid: string | null = null;
   private id: string | null = null;
 
@@ -168,11 +174,13 @@ export class MfbApi {
 
     const credits: TaxCredit[] = [];
     for (const program of data.programs) {
-      if (this.TAX_CREDIT_NAMES.includes(program.external_name as TaxCreditId)) {
+      const id = this.FEDERAL_CREDIT_SLOTS[program.external_name] ?? (program.external_name as TaxCreditId);
+      // While the old row and its federal replacement are both live, show the credit once.
+      if (this.TAX_CREDIT_NAMES.includes(id) && !credits.some((credit) => credit.id === id)) {
         credits.push({
-          id: program.external_name as TaxCreditId,
+          id,
           value: program.estimated_value,
-          external_name: program.external_name,
+          external_name: id,
           estimated_value: program.estimated_value,
           isPriorTaxYear: (program.warning_messages ?? []).some(warning =>
             warning.message.label.startsWith(PRIOR_TAX_YEAR_LABEL)

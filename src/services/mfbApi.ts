@@ -83,9 +83,11 @@ export class MfbApi {
   ];
 
   // Programs that moved to the API's federal white label, which every white label sees,
-  // under the slot they used to fill. The federal EITC replaced `co_tax_credit_eitc`.
+  // under the slot they used to fill. The federal EITC replaced `co_tax_credit_eitc` and the
+  // federal CTC replaced `co_tax_credit_ctc`.
   private readonly FEDERAL_CREDIT_SLOTS: Record<string, TaxCreditId> = {
     federal_eitc: 'co_tax_credit_eitc',
+    federal_ctc: 'co_tax_credit_ctc',
   };
 
   private uuid: string | null = null;
